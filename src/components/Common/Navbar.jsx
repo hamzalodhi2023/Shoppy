@@ -2,6 +2,8 @@ import React from 'react'
 import { HiOutlineShoppingBag, HiOutlineUsers } from 'react-icons/hi'
 import { HiBars3BottomRight } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
+import SearchBar from './SearchBar'
+
 
 function Navbar() {
     return (
@@ -30,7 +32,8 @@ function Navbar() {
                         <span className='absolute -top-1 bg-rabbit-red text-white text-xs rounded-full px-2 py-0.5'>4</span>
                     </button>
                     {/* Search */}
-                    <button>
+                    <SearchBar />
+                    <button className='md:hidden'>
                         <HiBars3BottomRight />
                     </button>
                 </div>
