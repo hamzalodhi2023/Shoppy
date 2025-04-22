@@ -8,6 +8,7 @@ function SearchBar() {
     const handleSearchToggle = () => {
         setIsOpen(!isOpen)
     }
+
     const handleSearch = (e) => {
         e.preventDefault()
         console.log("Search Term:", searchTerm);
