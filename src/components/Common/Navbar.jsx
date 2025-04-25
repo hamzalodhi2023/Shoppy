@@ -58,6 +58,15 @@ function Navbar() {
                         <IoMdClose className='h-6 w-6 text-gray-600 cursor-pointer' />
                     </button>
                 </div>
+                <div className='p-4'>
+                    <h2 className='text-xl font-semibold mb-4'>Menu</h2>
+                    <nav className='space-y-4'>
+                        <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Men</Link>
+                        <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Women</Link>
+                        <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Top Wear</Link>
+                        <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Bottom Wear</Link>
+                    </nav>
+                </div>
             </div>
         </>
     )
