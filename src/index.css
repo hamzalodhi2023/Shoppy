@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @theme {
-  --color-rabbit-red: #ea2e0e;
+  --color-steel-blue: #4682b4;
 }
 
 #root {

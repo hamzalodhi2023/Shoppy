@@ -39,7 +39,7 @@ function Navbar() {
                     </Link>
                     <button onClick={toggleCartDrawer} className='relative hover:text-black cursor-pointer'>
                         <HiOutlineShoppingBag className='h-6 w-6 text-gray-700 ' />
-                        <span className='absolute -top-1 bg-rabbit-red text-white text-xs rounded-full px-2 py-0.5'>4</span>
+                        <span className='absolute -top-1 bg-steel-blue text-white text-xs rounded-full px-2 py-0.5'>4</span>
                     </button>
                     {/* Search */}
                     <div className='overflow-hidden'></div>
