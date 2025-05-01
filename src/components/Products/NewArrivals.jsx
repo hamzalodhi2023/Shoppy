@@ -98,13 +98,21 @@ function NewArrivals() {
                 }
             ]
         },]
+
+    const scroll = (direction) => {
+        const scrollAmount = direction === "left" ? -300 : 300;
+        scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
     // Update Scroll Buttons
     const updateScrollButtons = () => {
         const container = scrollRef.current;
         if (container) {
             const leftScroll = container.scrollLeft;
+            const rightScrollable =
+                container.scrollWidth > leftScroll + container.clientWidth;
 
             setCanScrollLeft(leftScroll > 0);
+            setCanScrollRight(rightScrollable);
         }
         console.log({
             scrollLeft: container.scrollLeft,
@@ -130,10 +138,10 @@ function NewArrivals() {
                 <p className=''>Discover the latest styles straight off the runway, freshly added to keep your wardrobe on the cutting edge of fashion</p>
                 {/* Scroll Buttons */}
                 <div className="absolute right-0 bottom-[-30px] flex space-x-2">
-                    <button className="p-2 rounded border bg-white text-black">
+                    <button onClick={() => scroll("left")} disabled={!canScrollLeft} className={`p-2 rounded border ${canScrollLeft ? "bg-white text-black" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
                         <FiChevronLeft className='text-2xl ' />
                     </button>
-                    <button className="p-2 rounded border bg-white text-black">
+                    <button onClick={() => scroll("right")} disabled={!canScrollRight} className={`p-2 rounded border ${canScrollRight ? "bg-white text-black" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
                         <FiChevronRight className='text-2xl ' />
                     </button>
                 </div>
