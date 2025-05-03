@@ -138,10 +138,10 @@ function NewArrivals() {
                 <p className=''>Discover the latest styles straight off the runway, freshly added to keep your wardrobe on the cutting edge of fashion</p>
                 {/* Scroll Buttons */}
                 <div className="absolute right-0 bottom-[-30px] flex space-x-2">
-                    <button onClick={() => scroll("left")} disabled={!canScrollLeft} className={`p-2 rounded border ${canScrollLeft ? "bg-white text-black" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
+                    <button onClick={() => scroll("left")} disabled={!canScrollLeft} className={`p-2 rounded border ${canScrollLeft ? "bg-white text-black cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
                         <FiChevronLeft className='text-2xl ' />
                     </button>
-                    <button onClick={() => scroll("right")} disabled={!canScrollRight} className={`p-2 rounded border ${canScrollRight ? "bg-white text-black" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
+                    <button onClick={() => scroll("right")} disabled={!canScrollRight} className={`p-2 rounded border ${canScrollRight ? "bg-white text-black cursor-pointer" : "bg-gray-200 text-gray-400 cursor-not-allowed"}`}>
                         <FiChevronRight className='text-2xl ' />
                     </button>
                 </div>
