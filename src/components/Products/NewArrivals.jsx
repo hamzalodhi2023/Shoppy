@@ -99,6 +99,24 @@ function NewArrivals() {
             ]
         },]
 
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setStartX(e.pageX - scrollRef.current.offsetLeft);
+        setScrollLeft(scrollRef.current.scrollLeft);
+    };
+
+    const handleMouseMove = (e) => {
+        if (!isDragging) return;
+        const x = e.pageX - scrollRef.current.offsetLeft;
+        const walk = (x - startX) * 2;
+        scrollRef.current.scrollLeft = scrollLeft - walk;
+    };
+    const handleMouseUpOrLeave = () => {
+        setIsDragging(false);
+    };
+
+
+
     const scroll = (direction) => {
         const scrollAmount = direction === "left" ? -300 : 300;
         scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
@@ -126,11 +144,14 @@ function NewArrivals() {
         if (container) {
             container.addEventListener("scroll", updateScrollButtons)
             updateScrollButtons();
+            return () => {
+                container.removeEventListener("scroll", updateScrollButtons);
+            };
         }
-    })
+    }, [])
 
     return (
-        <section>
+        <section className='py-16 px-4 lg:px-0'>
             <div className="container mx-auto text-center mb-10 relative">
                 <h2 className="text-3xl font-bold mb-4">
                     Explore New Arrivals
@@ -147,10 +168,10 @@ function NewArrivals() {
                 </div>
             </div>
             {/* Scrollable Content */}
-            <div ref={scrollRef} className="container mx-auto overflow-x-scroll flex space-x-6 relative">
+            <div ref={scrollRef} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUpOrLeave} onMouseLeave={handleMouseUpOrLeave} className={`container mx-auto overflow-x-scroll flex space-x-6 relative ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}>
                 {NewArrivals.map((product) => (
                     <div key={product._id} className='min-w-[100%] sm:min-w-[30%] relative'>
-                        <img src={product.images[0]?.url} alt={product.images[0]?.altText || product.name} className='w-full h-[500px] object-cover rounded-lg' />
+                        <img src={product.images[0]?.url} alt={product.images[0]?.altText || product.name} className='w-full h-[500px] object-cover rounded-lg' draggable={false} />
                         <div className="absolute bottom-0 left-0 right-0 bg-white/20 backdrop-blur-sm text-white p-4 rounded-b-lg">
                             <Link to={`/product/${product._id}`} className='block'>
                                 <h4 className="font-medium">{product.name}</h4>
