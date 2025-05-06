@@ -36,6 +36,16 @@ function ProductDetails() {
         }
     }, [selectedProduct]);
 
+
+    const handleQuantityChange = (action) => {
+        if (action === "plus") setQuantity((prev) => prev + 1);
+        else if (action === "minus") {
+            if (quantity > 1) {
+                setQuantity((prev) => prev - 1);
+            }
+        }
+
+    }
     return (
         <div className='p-6'>
             <div className="max-w-6xl mx-auto bg-white p-8 rounded-lg">
@@ -101,7 +111,7 @@ function ProductDetails() {
                             <p className="text-gray-700">Size:</p>
                             <div className="flex gap-2 mt-2">
                                 {selectedProduct.size.map((size) => (
-                                    <button onClick={() => setSelectedSize(size)} key={size} className={`px-4 py-2 rounded border cursor-pointer`}>
+                                    <button onClick={() => setSelectedSize(size)} key={size} className={`px-4 py-2 rounded border cursor-pointer ${selectedSize === size ? "bg-black text-white" : ""}`}>
                                         {size}
                                     </button>
                                 ))}
@@ -111,17 +121,17 @@ function ProductDetails() {
                         <div className="mb-6">
                             <p className="text-gray-700">Quantity:</p>
                             <div className="flex items-center space-x-4 mt-2">
-                                <button className='px-2 bg-gray-200 rounded text-lg py-1 cursor-pointer'>
+                                <button onClick={() => handleQuantityChange("minus")} className='px-2 bg-gray-200 rounded text-lg py-1 cursor-pointer'>
                                     -
                                 </button>
-                                <span className='text-lg'>1</span>
-                                <button className='px-2 bg-gray-200 rounded text-lg py-1 cursor-pointer'>
+                                <span className='text-lg'>{quantity}</span>
+                                <button onClick={() => handleQuantityChange("plus")} className='px-2 bg-gray-200 rounded text-lg py-1 cursor-pointer'>
                                     +
                                 </button>
                             </div>
                         </div>
                         {/* Add to Cart Button */}
-                        <button className='bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer'>
+                        <button onClick={handleAddToCart} className='bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer'>
                             ADD TO CART
                         </button>
                         <div className="mt-10 text-gray-700">
