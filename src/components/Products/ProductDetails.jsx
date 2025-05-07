@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner';
 
 const selectedProduct = {
     name: "Stylish Jacket",
@@ -44,7 +45,12 @@ function ProductDetails() {
                 setQuantity((prev) => prev - 1);
             }
         }
+    }
 
+    const handleAddToCart = () => {
+        if (!selectedSize || !selectedColor) {
+            toast.error("Please select a size and color before adding to cart.")
+        }
     }
     return (
         <div className='p-6'>
