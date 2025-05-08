@@ -49,8 +49,18 @@ function ProductDetails() {
 
     const handleAddToCart = () => {
         if (!selectedSize || !selectedColor) {
-            toast.error("Please select a size and color before adding to cart.")
+            toast.error("Please select a size and color before adding to cart.", {
+                duration: 1000,
+            })
+            return;
         }
+        setIsButtonDisabled(true);
+        setTimeout(() => {
+            toast.success("Product Added to cart.", {
+                duration: 1000,
+            })
+            setIsButtonDisabled(false);
+        }, 500);
     }
     return (
         <div className='p-6'>
