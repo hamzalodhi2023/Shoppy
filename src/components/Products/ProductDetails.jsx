@@ -147,8 +147,8 @@ function ProductDetails() {
                             </div>
                         </div>
                         {/* Add to Cart Button */}
-                        <button onClick={handleAddToCart} className='bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer'>
-                            ADD TO CART
+                        <button onClick={handleAddToCart} disabled={isButtonDisabled} className={`bg-black text-white py-2 px-6 rounded w-full mb-4 cursor-pointer ${isButtonDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-gray-900"}`}>
+                            {isButtonDisabled ? "Adding..." : "ADD TO CART"}
                         </button>
                         <div className="mt-10 text-gray-700">
                             <h3 className='text-xl font-bold mb-4'>Characteristics:</h3>
