@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import { Toaster } from 'sonner';
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true }}>
       <Toaster position="top-right" />
       <Routes>
         <Route path='/' element={<UserLayout />}>
