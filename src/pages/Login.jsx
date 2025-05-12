@@ -38,7 +38,7 @@ function Login() {
                     <img src={login} alt="" className="h-[750px] w-full object-cover" />
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 export default Login
