@@ -32,7 +32,7 @@ function Login() {
                         <Link to="/register" className="text-blue-500 hover:underline">Register</Link>
                     </p>
                 </form>
-            </div >
+            </div>
             <div className="hidden md:block w-1/2 bg-gray-800">
                 <div className="h-full flex flex-col justify-center items-center">
                     <img src={login} alt="" className="h-[750px] w-full object-cover" />
