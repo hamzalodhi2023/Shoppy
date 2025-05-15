@@ -67,6 +67,9 @@ function MyOrdersPage() {
                                     <td className="py-2 px-2 sm:px-4 font-medium text-gray-900 whitespace-nowrap">
                                         #{order._id}
                                     </td>
+                                    <td className="py-2 px-2 sm:px-4">
+                                        {new Date(order.createdAt).toLocaleDateString()}{" "}
+                                    </td>
                                 </tr>
                             ))
                         ) : (
