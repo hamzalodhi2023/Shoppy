@@ -10,6 +10,9 @@ function Register() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(name, email, password);
+        setName("");
+        setEmail("");
+        setPassword("");
     }
     return (
         <div className="flex">
