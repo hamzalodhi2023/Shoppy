@@ -49,13 +49,15 @@ function MyOrdersPage() {
             <div className="relative shadow-md sm:rounded-lg overflow-hidden">
                 <table className="min-w-full text-left text-gray-500">
                     <thead className="bg-gray-100 text-xs uppercase text-gray-700">
-                        <th className="py-2 px-4 sm:py-3">Image</th>
-                        <th className="py-2 px-4 sm:py-3">Order ID</th>
-                        <th className="py-2 px-4 sm:py-3">Created</th>
-                        <th className="py-2 px-4 sm:py-3">Shipping Address</th>
-                        <th className="py-2 px-4 sm:py-3">Items</th>
-                        <th className="py-2 px-4 sm:py-3">Price</th>
-                        <th className="py-2 px-4 sm:py-3">Status</th>
+                        <tr>
+                            <th className="py-2 px-4 sm:py-3">Image</th>
+                            <th className="py-2 px-4 sm:py-3">Order ID</th>
+                            <th className="py-2 px-4 sm:py-3">Created</th>
+                            <th className="py-2 px-4 sm:py-3">Shipping Address</th>
+                            <th className="py-2 px-4 sm:py-3">Items</th>
+                            <th className="py-2 px-4 sm:py-3">Price</th>
+                            <th className="py-2 px-4 sm:py-3">Status</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {orders.length > 0 ? (
@@ -97,7 +99,7 @@ function MyOrdersPage() {
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div >
     )
 }
 export default MyOrdersPage
