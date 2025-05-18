@@ -27,7 +27,7 @@ function Navbar() {
                 </div>
                 {/* center - Navigation Links */}
                 <div className='hidden md:flex space-x-6'>
-                    <Link to='#' className='text-gray-700 hover:text-black text-sm font-medium uppercase'>Men</Link>
+                    <Link to='/collections/all' className='text-gray-700 hover:text-black text-sm font-medium uppercase'>Men</Link>
                     <Link to='#' className='text-gray-700 hover:text-black text-sm font-medium uppercase'>Women</Link>
                     <Link to='#' className='text-gray-700 hover:text-black text-sm font-medium uppercase'>Top Wear</Link>
                     <Link to='#' className='text-gray-700 hover:text-black text-sm font-medium uppercase'>Bottom Wear</Link>
@@ -61,7 +61,7 @@ function Navbar() {
                 <div className='p-4'>
                     <h2 className='text-xl font-semibold mb-4'>Menu</h2>
                     <nav className='space-y-4'>
-                        <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Men</Link>
+                        <Link to='/collections/all' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Men</Link>
                         <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Women</Link>
                         <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Top Wear</Link>
                         <Link to='#' className='block text-gray-700 hover:text-black text-sm font-medium uppercase mb-2'>Bottom Wear</Link>
