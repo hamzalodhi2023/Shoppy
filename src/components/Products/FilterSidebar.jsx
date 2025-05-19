@@ -144,10 +144,23 @@ function FilterSidebar() {
 
     useEffect(() => {
         const params = object.fromEntries([...searchParams]);
-    }, [])
+        setFilters({
+            category: params.category || "",
+            gender: params.gender || "",
+            color: params.color || "",
+            size: params.size ? params.size.split(",") : [],
+            material: params.material ? params.size.split(",") : [],
+            brand: params.brand ? params.size.split(",") : [],
+            minPrice: params.minPrice || 0,
+            maxPrice: params.maxPrice || 100,
+        })
+        setPriceRange([0, params.maxPrice || 100]);
+    }, [searchParams])
 
     return (
-        <div>FilterSidebar</div>
+        <div className="p-4">
+            <h3 className=""></h3>
+        </div>
     )
 }
 export default FilterSidebar
