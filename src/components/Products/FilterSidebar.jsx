@@ -169,17 +169,21 @@ function FilterSidebar() {
                     </div>
                 ))}
             </div>
+
             {/* Color Filter */}
             <div className="mb-6">
                 <label htmlFor="" className="block text-gray-600 font-medium mb-2">Color</label>
                 <div className="flex flex-wrap gap-2">
                     {colors.map((color) => (
-                        <button key={color} name="color" className="w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105"></button>
+                        <button key={color} name="color" className="w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105" style={{ backgroundColor: color.toLocaleLowerCase }}></button>
                     ))}
                 </div>
             </div>
 
-        </div>
+            {/* Size Filter */}
+
+
+        </div >
     )
 }
 export default FilterSidebar
