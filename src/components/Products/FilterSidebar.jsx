@@ -16,16 +16,12 @@ function FilterSidebar() {
     const [priceRange, setPriceRange] = useState()
 
     const categories = ["Top Wear", "Bottom Wear"]
-    const color = [
+    const colors = [
         "Black",
         "White",
-        "Red",
         "Blue",
         "Green",
         "Yellow",
-        "Orange",
-        "Purple",
-        "Pink",
         "Brown",
         "Gray",
         "Silver",
@@ -34,9 +30,6 @@ function FilterSidebar() {
         "Cyan",
         "Magenta",
         "Teal",
-        "Olive",
-        "Maroon",
-        "Navy",
         "Turquoise",
         "Indigo",
         "Lavender",
@@ -48,11 +41,7 @@ function FilterSidebar() {
         "Pink",
         "Purple",
         "Red",
-        "Silver",
-        "Teal",
-        "Turquoise",
         "Violet",
-        "Yellow",
     ];
     const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
     const materials = [
@@ -181,6 +170,14 @@ function FilterSidebar() {
                 ))}
             </div>
             {/* Color Filter */}
+            <div className="mb-6">
+                <label htmlFor="" className="block text-gray-600 font-medium mb-2">Color</label>
+                <div className="flex flex-wrap gap-2">
+                    {colors.map((color) => (
+                        <button key={color} name="color" className="w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105"></button>
+                    ))}
+                </div>
+            </div>
 
         </div>
     )
