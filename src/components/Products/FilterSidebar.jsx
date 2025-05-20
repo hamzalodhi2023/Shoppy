@@ -143,7 +143,7 @@ function FilterSidebar() {
     const gender = ["Men", "Women"];
 
     useEffect(() => {
-        const params = object.fromEntries([...searchParams]);
+        const params = Object.fromEntries([...searchParams]);
         setFilters({
             category: params.category || "",
             gender: params.gender || "",
@@ -159,7 +159,29 @@ function FilterSidebar() {
 
     return (
         <div className="p-4">
-            <h3 className=""></h3>
+            <h3 className="text-xl font-medium text-gray-800 mb-4">Filter</h3>
+            {/* Category Filter */}
+            <div className="mb-6">
+                <label className="block text-gray-600 font-medium mb-2">Category</label>
+                {categories.map((category) => (
+                    <div key={category} className="flex items-center mb-1">
+                        <input type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
+                        <span className="text-gray-700">{category}</span>
+                    </div>
+                ))}
+            </div>
+            {/* Gender Filter */}
+            <div className="mb-6">
+                <label className="block text-gray-600 font-medium mb-2">Gender</label>
+                {categories.map((gender) => (
+                    <div key={gender} className="flex items-center mb-1">
+                        <input type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
+                        <span className="text-gray-700">{gender}</span>
+                    </div>
+                ))}
+            </div>
+            {/* Color Filter */}
+
         </div>
     )
 }
