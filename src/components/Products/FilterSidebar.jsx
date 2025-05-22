@@ -49,7 +49,6 @@ function FilterSidebar() {
         "Polyester",
         "Wool",
         "Silk",
-        "Linen",
         "Denim",
         "Velvet",
         "Satin",
@@ -62,11 +61,9 @@ function FilterSidebar() {
         "Cashmere",
         "Hemp",
         "Linen",
-        "Cotton Blend",
         "Polyester Blend",
         "Wool Blend",
         "Silk Blend",
-        "Linen Blend",
         "Denim Blend",
         "Velvet Blend",
         "Satin Blend",
@@ -79,12 +76,8 @@ function FilterSidebar() {
         "Cashmere Blend",
         "Hemp Blend",
         "Linen Blend",
-        "Cotton Blend",
-        "Polyester Blend",
-        "Wool Blend",
-        "Silk Blend",
-        "Linen Blend",
-    ]
+        "Cotton Blend"
+    ];
     const brands = [
         "Adidas",
         "Nike",
@@ -100,34 +93,9 @@ function FilterSidebar() {
         "Timberland",
         "Columbia",
         "The North Face",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-        "Patagonia",
-        "The North Face",
-        "Columbia",
-    ]
+        "Patagonia"
+    ];
+
 
     const gender = ["Men", "Women"];
 
@@ -162,7 +130,7 @@ function FilterSidebar() {
             {/* Gender Filter */}
             <div className="mb-6">
                 <label className="block text-gray-600 font-medium mb-2">Gender</label>
-                {categories.map((gender) => (
+                {gender.map((gender) => (
                     <div key={gender} className="flex items-center mb-1">
                         <input type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
                         <span className="text-gray-700">{gender}</span>
@@ -186,6 +154,29 @@ function FilterSidebar() {
                 {sizes.map((size) => (
                     <div key={size} className="flex items-center mb-1">
                         <input type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <span className="text-gray-700">{size}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Size Filter */}
+            <div className="mb-6">
+                <label className="block text-gray-600 font-medium mb-2"></label>
+                {materials.map((material) => (
+                    <div key={material} className="flex items-center mb-1">
+                        <input type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <span className="text-gray-700">{material}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* Size Filter */}
+            <div className="mb-6">
+                <label className="block text-gray-600 font-medium mb-2"></label>
+                {brands.map((brand) => (
+                    <div key={brand} className="flex items-center mb-1">
+                        <input type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <span className="text-gray-700">{brand}</span>
                     </div>
                 ))}
             </div>
