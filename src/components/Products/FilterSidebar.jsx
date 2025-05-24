@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 
 function FilterSidebar() {
     const [searchParams, setSearchParams] = useSearchParams();
+    const navigate = useNavigate();
     const [filters, setFilters] = useState({
         category: "",
         gender: "",
@@ -130,6 +131,7 @@ function FilterSidebar() {
             newFilters[name] = value;
         }
         setFilters(newFilters);
+        updateURLParams(newFilters);
     };
 
     const updateURLParams = (newFilters) => {
@@ -142,6 +144,7 @@ function FilterSidebar() {
             }
         })
         setSearchParams(params);
+        navigate(`${params.toString()}`)
     }
     return (
         <div className="p-4">
@@ -151,7 +154,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Category</label>
                 {categories.map((category) => (
                     <div key={category} className="flex items-center mb-1">
-                        <input value={category} onChange={handleFilterChange} type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
+                        <input checked={filters.category} value={category} onChange={handleFilterChange} type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
                         <span className="text-gray-700">{category}</span>
                     </div>
                 ))}
