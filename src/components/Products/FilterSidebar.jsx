@@ -141,6 +141,7 @@ function FilterSidebar() {
                 params.append(key, newFilters[key]);
             }
         })
+        setSearchParams(params);
     }
     return (
         <div className="p-4">
