@@ -136,15 +136,15 @@ function FilterSidebar() {
 
     const updateURLParams = (newFilters) => {
         const params = new URLSearchParams();
-        object.keys(newFilters).forEach((key) => {
+        Object.keys(newFilters).forEach((key) => {
             if (Array.isArray(newFilters[key]) && newFilters[key].length > 0) {
                 params.append(key, newFilters[key].join(","));
             } else if (newFilters[key]) {
                 params.append(key, newFilters[key]);
             }
-        })
+        });
         setSearchParams(params);
-        navigate(`${params.toString()}`)
+        navigate(`${params.toString()}`);
     }
     return (
         <div className="p-4">
