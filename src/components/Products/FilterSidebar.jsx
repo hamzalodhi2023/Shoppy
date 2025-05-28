@@ -175,7 +175,7 @@ function FilterSidebar() {
                 <label htmlFor="" className="block text-gray-600 font-medium mb-2">Color</label>
                 <div className="flex flex-wrap gap-2">
                     {colors.map((color) => (
-                        <button value={color} onClick={handleFilterChange} key={color} name="color" className={`w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105 ${}`} style={{ backgroundColor: color.toLocaleLowerCase() }}></button>
+                        <button value={color} onClick={handleFilterChange} key={color} name="color" className={`w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105 ${filters.color === color ? "ring-2 ring-blue-500" : ""}`} style={{ backgroundColor: color.toLocaleLowerCase() }}></button>
                     ))}
                 </div>
             </div>
@@ -185,7 +185,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Sizes</label>
                 {sizes.map((size) => (
                     <div key={size} className="flex items-center mb-1">
-                        <input value={size} onChange={handleFilterChange} type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <input checked={filters.size === size} value={size} onChange={handleFilterChange} type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
                         <span className="text-gray-700">{size}</span>
                     </div>
                 ))}
