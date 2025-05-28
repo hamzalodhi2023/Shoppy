@@ -144,7 +144,7 @@ function FilterSidebar() {
             }
         });
         setSearchParams(params);
-        navigate(`${params.toString()}`);
+        navigate(`?${params.toString()}`);
     }
     return (
         <div className="p-4">
