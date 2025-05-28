@@ -1,6 +1,6 @@
 function SortOptions() {
     return (
-        <div>SortOptions</div>
+        <div className="mb-4"></div>
     )
 }
 export default SortOptions
