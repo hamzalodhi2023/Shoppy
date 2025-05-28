@@ -108,13 +108,13 @@ function FilterSidebar() {
             gender: params.gender || "",
             color: params.color || "",
             size: params.size ? params.size.split(",") : [],
-            material: params.material ? params.size.split(",") : [],
-            brand: params.brand ? params.size.split(",") : [],
+            material: params.material ? params.material.split(",") : [],
+            brand: params.brand ? params.brand.split(",") : [],
             minPrice: params.minPrice || 0,
             maxPrice: params.maxPrice || 100,
-        })
+        });
         setPriceRange([0, params.maxPrice || 100]);
-    }, [searchParams])
+    }, [searchParams]);
 
     const handleFilterChange = (e) => {
 
