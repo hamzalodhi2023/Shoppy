@@ -154,7 +154,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Category</label>
                 {categories.map((category) => (
                     <div key={category} className="flex items-center mb-1">
-                        <input value={category} onChange={handleFilterChange} type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
+                        <input checked={filters.category === category} value={category} onChange={handleFilterChange} type="radio" name="category" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
                         <span className="text-gray-700">{category}</span>
                     </div>
                 ))}
@@ -164,7 +164,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Gender</label>
                 {gender.map((gender) => (
                     <div key={gender} className="flex items-center mb-1">
-                        <input value={gender} onChange={handleFilterChange} type="radio" name="gender" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
+                        <input checked={filters.gender === gender} value={gender} onChange={handleFilterChange} type="radio" name="gender" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
                         <span className="text-gray-700">{gender}</span>
                     </div>
                 ))}
@@ -175,7 +175,7 @@ function FilterSidebar() {
                 <label htmlFor="" className="block text-gray-600 font-medium mb-2">Color</label>
                 <div className="flex flex-wrap gap-2">
                     {colors.map((color) => (
-                        <button value={color} onClick={handleFilterChange} key={color} name="color" className="w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105" style={{ backgroundColor: color.toLocaleLowerCase() }}></button>
+                        <button value={color} onClick={handleFilterChange} key={color} name="color" className={`w-8 h-8 rounded-full border border-gray-300 cursor-pointer transition hover:scale-105 ${}`} style={{ backgroundColor: color.toLocaleLowerCase() }}></button>
                     ))}
                 </div>
             </div>
