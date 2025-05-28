@@ -185,7 +185,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Sizes</label>
                 {sizes.map((size) => (
                     <div key={size} className="flex items-center mb-1">
-                        <input checked={filters.size === size} value={size} onChange={handleFilterChange} type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <input checked={filters.size.includes(size)} value={size} onChange={handleFilterChange} type="checkbox" name="size" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
                         <span className="text-gray-700">{size}</span>
                     </div>
                 ))}
@@ -196,7 +196,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Materials</label>
                 {materials.map((material) => (
                     <div key={material} className="flex items-center mb-1">
-                        <input value={material} onChange={handleFilterChange} type="checkbox" name="material" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <input checked={filters.material.includes(material)} value={material} onChange={handleFilterChange} type="checkbox" name="material" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
                         <span className="text-gray-700">{material}</span>
                     </div>
                 ))}
