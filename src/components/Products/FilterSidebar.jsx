@@ -207,7 +207,7 @@ function FilterSidebar() {
                 <label className="block text-gray-600 font-medium mb-2">Brands</label>
                 {brands.map((brand) => (
                     <div key={brand} className="flex items-center mb-1">
-                        <input value={brand} onChange={handleFilterChange} type="checkbox" name="brand" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
+                        <input checked={filters.brand.includes(brand)} value={brand} onChange={handleFilterChange} type="checkbox" name="brand" className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400" />
                         <span className="text-gray-700">{brand}</span>
                     </div>
                 ))}
