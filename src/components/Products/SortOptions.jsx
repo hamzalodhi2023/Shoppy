@@ -7,7 +7,6 @@ function SortOptions() {
         searchParams.set("sortBy", sortBy)
         setSearchParams(searchParams);
     }
-
     return (
         <div className="mb-4 flex items-center justify-end">
             <select name="" id="sort" className="border p-2 rounded-md focus:outline-none">
