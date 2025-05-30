@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import CollectionPage from './pages/CollectionPage';
+import ProductDetails from './components/Products/ProductDetails';
 function App() {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ function App() {
           <Route path='register' element={<Register />} />
           <Route path='profile' element={<Profile />} />
           <Route path='collections/:collection' element={<CollectionPage />} />
+          <Route path="product/:id" element={<ProductDetails />} />
         </Route>
         <Route>
           {/* Admin Layout */}
