@@ -108,7 +108,7 @@ function ProductDetails() {
                             selectedProduct.images.map((image, index) => (
                                 <img
                                     key={index}
-                                    src={image.url}
+                                src={image.url}
                                     alt={image.altText || `Thumbnail ${index}`}
                                     className="w-20 h-20 object-cover rounded-lg cursor-pointer"
                                     onClick={() => setMainImage(image.url)}
