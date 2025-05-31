@@ -35,7 +35,7 @@ function Checkout() {
     return (
         <div className="gird grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto py-10 px-6 tracking-tighter">
             {/* Left Section */}
-
+            <div className=""></div>
             {/* Right Section */}
         </div>
         // <div className="min-h-screen bg-gray-100 py-8">
