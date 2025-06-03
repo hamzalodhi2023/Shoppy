@@ -47,7 +47,12 @@ function Checkout() {
                     <div className="mb-4 grid grid-cols-2 gap-4">
                         <div>
                             <label className="block text-gray-700">First Name</label>
-                            <input type="text" className="w-full p-2 border rounded" required value={shippingAddress.firstName} />
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                required
+                                value={shippingAddress.firstName}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value, })} />
                         </div>
                     </div>
                 </form>
