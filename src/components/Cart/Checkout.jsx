@@ -54,6 +54,49 @@ function Checkout() {
                                 value={shippingAddress.firstName}
                                 onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value, })} />
                         </div>
+                        <div>
+                            <label className="block text-gray-700">First Name</label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                required
+                                value={shippingAddress.firstName}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value, })} />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700">Last Name</label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                required
+                                value={shippingAddress.lastName}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, lastName: e.target.value, })} />
+                        </div>
+                    </div>
+                    <div className="m-b">
+                        <label htmlFor="" className="block text-gray-700">Address</label>
+                        <input type="text" value={shippingAddress.address} onChange={(e) => setShippingAddress({ ...shippingAddress, address: e.target.value })
+                        } className="w-full p-2 border rounded" required />
+                    </div>
+                    <div className="m-4 grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-gray-700">First Name</label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                required
+                                value={shippingAddress.firstName}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, firstName: e.target.value, })} />
+                        </div>
+                        <div>
+                            <label className="block text-gray-700">Last Name</label>
+                            <input
+                                type="text"
+                                className="w-full p-2 border rounded"
+                                required
+                                value={shippingAddress.lastName}
+                                onChange={(e) => setShippingAddress({ ...shippingAddress, lastName: e.target.value, })} />
+                        </div>
                     </div>
                 </form>
             </div>
