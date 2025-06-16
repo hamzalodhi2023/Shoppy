@@ -126,12 +126,26 @@ function Checkout() {
                             <div className="flex items-start">
                                 <img src={product.image} alt={product.name} className="w-full h-24 object-cover mr-4" />
                             </div>
+                            <h3 className="text-md">{product.name}</h3>
+                            <p className="text-gray-500">Size: {product.size}</p>
+                            <p className="text-gray-500">Color: {product.color}</p>
                             <div>
-                                <h3 className="text-md">{product.name}</h3>
-                                <p className="text-gray-500">Size</p>
                             </div>
+                            <p className="text-xl">${product.price?.toLocaleString()}</p>
                         </div>
                     ))}
+                </div>
+                <div className="flex justify-between items-center text-lg mb-4">
+                    <p>Subtotal</p>
+                    <p>${cart.totalPrice?.toLocaleString()}</p>
+                </div>
+                <div className="flex justify-between items-center text-lg">
+                    <p>Shipping</p>
+                    <p>Free</p>
+                </div>
+                <div className="flex justify-between items-center text-lg mt-4 border-t pt-4">
+                    <p>Total</p>
+                    <p>${cart.totalPrice?.toLocaleString()}</p>
                 </div>
             </div>
         </div>
