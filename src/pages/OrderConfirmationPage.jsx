@@ -30,7 +30,8 @@ const checkout = {
 
 function OrderConfirmationPage() {
     return (
-        <div>OrderConfirmationPage</div>
+        <div>OrderConfirmationPage
+        </div>
     )
 }
 export default OrderConfirmationPage
