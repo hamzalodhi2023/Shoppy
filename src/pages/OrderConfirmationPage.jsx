@@ -22,7 +22,9 @@ const checkout = {
         },
     ],
     shippingAddress: {
-        address: "123 Fashion Streey"
+        address: "123 Fashion Streey",
+        city: "New York",
+        country: "USA"
     }
 
 }
