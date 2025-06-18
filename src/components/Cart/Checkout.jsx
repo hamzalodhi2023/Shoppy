@@ -107,7 +107,7 @@ function Checkout() {
                     </div>
                     <div className="mt-6">
                         {!checkoutId ? (
-                            <button type="submit" className="w-full bg-black text-white py-3 rounded">Continue to payment</button>
+                            <button onClick={(e) => { e.preventDefault(), navigate("/order-confirmation") }} type="submit" className="w-full bg-black text-white py-3 rounded">Continue to payment</button>
                         ) : (
                             <div>
                                 <h3 className="text-lg mb-4">Pay with Paypal</h3>

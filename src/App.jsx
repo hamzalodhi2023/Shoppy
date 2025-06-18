@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import CollectionPage from './pages/CollectionPage';
 import ProductDetails from './components/Products/ProductDetails';
 import Checkout from './components/Cart/Checkout';
+import OrderConfirmationPage from './pages/OrderConfirmationPage';
 function App() {
   return (
     <BrowserRouter>
@@ -21,6 +22,7 @@ function App() {
           <Route path='collections/:collection' element={<CollectionPage />} />
           <Route path="product/:id" element={<ProductDetails />} />
           <Route path="checkout" element={<Checkout />} />
+          <Route path="order-confirmation" element={<OrderConfirmationPage />} />
         </Route>
         <Route>
           {/* Admin Layout */}
