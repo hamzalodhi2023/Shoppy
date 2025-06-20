@@ -126,7 +126,7 @@ function Checkout() {
                             <div className="flex items-start">
                                 <img src={product.image} alt={product.name} className="w-full h-24 object-cover mr-4" />
                             </div>
-                            <h3 className="text-md">{product.name}</h3>
+                            <h3 className="text-base">{product.name}</h3>
                             <p className="text-gray-500">Size: {product.size}</p>
                             <p className="text-gray-500">Color: {product.color}</p>
                             <div>
