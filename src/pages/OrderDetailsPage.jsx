@@ -58,6 +58,37 @@ function OrderDetailsPage() {
                             </span>
                         </div>
                     </div>
+                    {/* Customer, Payment, Shipping Info */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-8">
+                        <div>
+                            <h4 className="text-lg font-semibold mb-2">
+                                Payment Info
+                            </h4>
+                            <p>Payment Method: {orderDetails.paymentMethod}</p>
+                            <p>Status: {orderDetails.isPaid ? "Paid" : "Unpaid"}</p>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-semibold mb-2">
+                                Shipping Info
+                            </h4>
+                            <p>Shipping Method: {orderDetails.shippingMethod}</p>
+                            <p>Address: {`${orderDetails.shippingAddress.city},  ${orderDetails.shippingAddress.country}`}</p>
+                        </div>
+                    </div>
+                    {/* Product List */}
+                    <div className="overflow-x-auto">
+                        <h4 className="text-lg font-semibold mb-4">Products</h4>
+                        <table className="min-w-full text-gray-600 mb-4">
+                            <thead className="bg-gray-100">
+                                <tr>
+                                    <th className="py-2 px-4">Name</th>
+                                    <th className="py-2 px-4">Unit Price</th>
+                                    <th className="py-2 px-4">Quantity</th>
+                                    <th className="py-2 px-4">Total</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
             )}
         </div>
