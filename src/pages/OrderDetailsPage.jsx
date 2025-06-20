@@ -54,7 +54,7 @@ function OrderDetailsPage() {
                                 {orderDetails.isPaid ? "Approved" : "Pending"}
                             </span>
                             <span className={`${orderDetails.isDelivered ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"} px-3 py-1 rounded-full text-sm font-medium mb-2`}>
-                                {orderDetails.isDelivered ? "Approved" : "Pending"}
+                                {orderDetails.isDelivered ? "Delivered" : "Pending Delivery"}
                             </span>
                         </div>
                     </div>
