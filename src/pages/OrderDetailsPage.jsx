@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { Link, Links, useParams } from "react-router-dom"
 
 function OrderDetailsPage() {
     const { id } = useParams()
@@ -87,6 +87,19 @@ function OrderDetailsPage() {
                                     <th className="py-2 px-4">Total</th>
                                 </tr>
                             </thead>
+                            <tbody>
+                                {orderDetails.orderItems.map((item) => {
+                                    return <tr key={item.productId} className="border-b">
+                                        <td className="py-2 px-4 flex items-center">
+                                            <img
+                                                src={item.image}
+                                                alt={item.name}
+                                                className="w-12 h-12 object-cover rounded-lg mr-4" />
+                                            <Link to={`/product/${item.productId}`} className="text-blue-500"></Link>
+                                        </td>
+                                    </tr>
+                                })}
+                            </tbody>
                         </table>
                     </div>
                 </div>
