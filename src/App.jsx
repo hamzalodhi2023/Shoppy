@@ -10,6 +10,7 @@ import ProductDetails from './components/Products/ProductDetails';
 import Checkout from './components/Cart/Checkout';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
 import OrderDetailsPage from './pages/OrderDetailsPage';
+import MyOrdersPage from './pages/MyOrdersPage';
 function App() {
   return (
     <BrowserRouter>
@@ -25,6 +26,7 @@ function App() {
           <Route path="checkout" element={<Checkout />} />
           <Route path="order-confirmation" element={<OrderConfirmationPage />} />
           <Route path="order/:id" element={<OrderDetailsPage />} />
+          <Route path="my-orders" element={<MyOrdersPage />} />
         </Route>
         <Route>
           {/* Admin Layout */}
