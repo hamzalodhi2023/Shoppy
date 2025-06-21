@@ -95,7 +95,9 @@ function OrderDetailsPage() {
                                                 src={item.image}
                                                 alt={item.name}
                                                 className="w-12 h-12 object-cover rounded-lg mr-4" />
-                                            <Link to={`/product/${item.productId}`} className="text-blue-500"></Link>
+                                            <Link to={`/product/${item.productId}`} className="text-blue-500 hover:underline">
+                                                {item.name}
+                                            </Link>
                                         </td>
                                     </tr>
                                 })}
