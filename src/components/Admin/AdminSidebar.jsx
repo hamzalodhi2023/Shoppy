@@ -1,9 +1,10 @@
-import { FaBoxOpen, FaClipboardList, FaStore, FaUser } from "react-icons/fa"
-import { Link, NavLink } from "react-router-dom"
+import { FaBoxOpen, FaClipboardList, FaSignOutAlt, FaStore, FaUser } from "react-icons/fa"
+import { Link, NavLink, useNavigate } from "react-router-dom"
 
 function AdminSidebar() {
+    const navigate = useNavigate()
     const handleLogout = () => {
-
+        navigate("/");
     }
     return (
         <div className="p-6">
@@ -32,9 +33,11 @@ function AdminSidebar() {
                     <span>Shop</span>
                 </NavLink>
                 <div className="mt-6">
-                    <button onClick={handleLogout}></button>
+                    <button onClick={handleLogout} className="w-full bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded flex items-center justify-center space-x-2">
+                        <FaSignOutAlt />
+                        <span>Logout</span>
+                    </button>
                 </div>
-
             </nav>
         </div>
     )
