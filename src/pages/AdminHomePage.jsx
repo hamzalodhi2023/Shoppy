@@ -9,7 +9,7 @@ function AdminHomePage() {
             },
             totalPrice: 110,
             status: "Processing",
-        }
+        },
     ]
     return (
         <div className="max-w-7xl mx-auto p-6">
