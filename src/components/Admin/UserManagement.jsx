@@ -68,6 +68,7 @@ function UserManagement() {
                             <option value="admin">Admin</option>
                         </select>
                     </div>
+                    <button type="submit" className=""></button>
                 </form>
             </div>
         </div>
