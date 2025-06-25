@@ -19,10 +19,10 @@ function UserManagement() {
 
 
     const handleChange = (e) => {
-        setFormDate({
+    setFormData({
             ...formData,
-            [e.target.name]: e.target.value
-        })
+            [e.target.name]: e.target.value,
+        });
     }
     return (
         <div className="max-w-7xl mx-auto p-6">
