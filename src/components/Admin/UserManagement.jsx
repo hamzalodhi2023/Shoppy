@@ -56,7 +56,7 @@ function UserManagement() {
             <div className="p-t rounded-lg mb-6">
                 <h3 className="text-lg font-bold mb-4">Add New User</h3>
                 <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
+                    <div className="mb-4">1
                         <label className="block text-gray-700">Name</label>
                         <input
                             type="text"
