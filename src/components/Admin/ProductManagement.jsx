@@ -22,7 +22,10 @@ function ProductManagement() {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {products.length > ? (): } */}
+                        {products.length > 0 ? (products.map((product) => <tr key={products._id}
+                            className="border-b hover:bg-gray-50 cursor-pointer">
+                            <td className="p-4 font-medium text-gray-900 whitespace-nowrap">{product.name}</td>
+                        </tr>)) : (<tr></tr>)}
                     </tbody>
                 </table>
             </div>
