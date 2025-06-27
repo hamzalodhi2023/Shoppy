@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 function ProductManagement() {
     const products = [
         {
@@ -25,6 +27,13 @@ function ProductManagement() {
                         {products.length > 0 ? (products.map((product) => <tr key={products._id}
                             className="border-b hover:bg-gray-50 cursor-pointer">
                             <td className="p-4 font-medium text-gray-900 whitespace-nowrap">{product.name}</td>
+                            <td className="p-4">${product.price}</td>
+                            <td className="p-4">${product.sku}</td>
+                            <td className="p-4">
+                                <Link to={`/admin/product/${product._id}/edit`} className="bg-yellow-500 text-white px-2 py-1 rounded mr-2 hover:bg-yellow-600">
+                                    Edit
+                                </Link>
+                            </td>
                         </tr>)) : (<tr></tr>)}
                     </tbody>
                 </table>
