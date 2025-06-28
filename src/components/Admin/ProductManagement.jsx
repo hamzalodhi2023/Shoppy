@@ -36,14 +36,14 @@ function ProductManagement() {
                             <td className="p-4">${product.price}</td>
                             <td className="p-4">${product.sku}</td>
                             <td className="p-4">
-                                <Link to={`/admin/product/${product._id}/edit`} className="bg-yellow-500 text-white px-2 py-1 rounded mr-2 hover:bg-yellow-600">
+                                <Link to={`/admin/products/${product._id}/edit`} className="bg-yellow-500 text-white px-2 py-1 rounded mr-2 hover:bg-yellow-600">
                                     Edit
                                 </Link>
                                 <button onClick={() => handleDelete(product._id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
                             </td>
                         </tr>)) : (
                             <tr>
-                                <td className=""></td>
+                                <td colSpan={4} className="p-4 text-center text-gray-500">No Product found.</td>
                             </tr>
                         )}
                     </tbody>
