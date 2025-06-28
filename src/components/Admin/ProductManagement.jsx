@@ -10,6 +10,12 @@ function ProductManagement() {
 
         }
     ]
+
+    const handleDelete = (id) => {
+        if (window.confirm("Are you sure you want to delete this product?")) {
+            console.log("Delete Product with id:", id);
+        }
+    };
     return (
         <div className="max-w-7xl mx-auto p-6">
             <h2 className="text-2xl font-bold mb-6 ">Product Management</h2>
@@ -33,8 +39,13 @@ function ProductManagement() {
                                 <Link to={`/admin/product/${product._id}/edit`} className="bg-yellow-500 text-white px-2 py-1 rounded mr-2 hover:bg-yellow-600">
                                     Edit
                                 </Link>
+                                <button onClick={() => handleDelete(product._id)} className="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600">Delete</button>
                             </td>
-                        </tr>)) : (<tr></tr>)}
+                        </tr>)) : (
+                            <tr>
+                                <td className=""></td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
