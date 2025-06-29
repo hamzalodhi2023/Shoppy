@@ -9,15 +9,14 @@
   font-style: normal;
 }
 
-/* src/index.css ya jahan Tailwind import hoti ho, wahan yeh add karo */
 @layer utilities {
   .no-arrow::-webkit-inner-spin-button,
   .no-arrow::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
   }
-
   .no-arrow {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
 }
