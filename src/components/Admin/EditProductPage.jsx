@@ -54,6 +54,18 @@ function EditProductPage() {
                         className="w-full border no-arrow border-gray-300 rounded-md p-2"
                         required />
                 </div>
+                {/* Count In Stock */}
+                <div className="mb-6">
+                    <label className="block font-semibold mb-2">Price</label>
+                    <input
+                        type="number"
+                        name="price"
+                        value={productData.price}
+                        onChange={handleChange}
+                        className="w-full border no-arrow border-gray-300 rounded-md p-2"
+                        required />
+                </div>
+
             </form>
         </div>
     )
