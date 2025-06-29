@@ -38,11 +38,13 @@ function EditProductPage() {
                     <label className="block font-semibold mb-2">Product Name</label>
                     <input type="text" name="name" value={productData.name} onChange={handleChange} className="w-full border border-gray-300 rounded-md p-2" required />
                 </div>
+
                 {/* Description */}
                 <div className="mb-6">
                     <label className="block font-semibold mb-2">Description</label>
                     <textarea name="description" value={productData.description} className="w-full border border-gray-300 rounded-md p-2" rows={4} required />
                 </div>
+
                 {/* Price */}
                 <div className="mb-6">
                     <label className="block font-semibold mb-2">Price</label>
@@ -54,18 +56,30 @@ function EditProductPage() {
                         className="w-full border no-arrow border-gray-300 rounded-md p-2"
                         required />
                 </div>
+
                 {/* Count In Stock */}
                 <div className="mb-6">
-                    <label className="block font-semibold mb-2">Price</label>
+                    <label className="block font-semibold mb-2">Count In Stock</label>
                     <input
                         type="number"
-                        name="price"
-                        value={productData.price}
+                        name="countInStock"
+                        value={productData.countInStock}
                         onChange={handleChange}
                         className="w-full border no-arrow border-gray-300 rounded-md p-2"
                         required />
                 </div>
 
+                {/* SKU */}
+                <div className="mb-6">
+                    <label className="block font-semibold mb-2">SKU</label>
+                    <input
+                        type="text"
+                        name="sku"
+                        value={productData.sku}
+                        onChange={handleChange}
+                        className="w-full border no-arrow border-gray-300 rounded-md p-2"
+                        required />
+                </div>
             </form>
         </div>
     )
