@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@theme {
+
+:root {
   --color-steel-blue: #4682b4;
 }
 
