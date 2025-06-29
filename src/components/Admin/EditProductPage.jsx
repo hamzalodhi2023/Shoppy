@@ -43,6 +43,17 @@ function EditProductPage() {
                     <label className="block font-semibold mb-2">Description</label>
                     <textarea name="description" value={productData.description} className="w-full border border-gray-300 rounded-md p-2" rows={4} required />
                 </div>
+                {/* Price */}
+                <div className="mb-6">
+                    <label className="block font-semibold mb-2">Price</label>
+                    <input
+                        type="number"
+                        name="price"
+                        value={productData.price}
+                        onChange={handleChange}
+                        className="w-full border no-arrow border-gray-300 rounded-md p-2"
+                        required />
+                </div>
             </form>
         </div>
     )
