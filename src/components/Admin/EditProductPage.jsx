@@ -95,6 +95,20 @@ function EditProductPage() {
             required
           />
         </div>
+        {/* Size */}
+        <div className="mb-6">
+          <label className="mb-2 block font-semibold">
+            Size (comma-separated)
+          </label>
+          <input
+            type="text"
+            name="size"
+            value={productData.size}
+            onChange={handleChange}
+            className="no-arrow w-full rounded-md border border-gray-300 p-2"
+            required
+          />
+        </div>
       </form>
     </div>
   );
