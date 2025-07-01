@@ -16,10 +16,10 @@ function EditProductPage() {
     gender: "",
     images: [
       {
-        url: "https://picsum.photos.150?random=1",
+        url: "https://picsum.photos/150?random=1",
       },
       {
-        url: "https://picsum.photos.150?random=2",
+        url: "https://picsum.photos/150?random=2",
       },
     ],
   });
