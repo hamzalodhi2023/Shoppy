@@ -33,10 +33,15 @@ function EditProductPage() {
     const file = e.target.files[0];
     console.log(file);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(productData);
+  };
   return (
     <div className="mx-auto max-w-5xl rounded-md p-6 shadow-md">
       <h2 className="mb-6 text-3xl font-bold">Edit Product</h2>
-      <form>
+      <form onChange={handleSubmit}>
         {/* Name */}
         <div className="mb-6">
           <label className="mb-2 block font-semibold">Product Name</label>
