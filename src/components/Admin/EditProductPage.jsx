@@ -144,6 +144,13 @@ function EditProductPage() {
         <div className="mb-6">
           <label className="mb-2 block font-semibold">Upload Image</label>
           <input type="file" onChange={handleImageUpload} />
+          <div className="mt-4 flex gap-4">
+            {productData.images.map((image, index) => (
+              <div key={index}>
+                <img src="" alt="" />
+              </div>
+            ))}
+          </div>
         </div>
       </form>
     </div>
