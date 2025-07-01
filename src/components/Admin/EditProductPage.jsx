@@ -156,6 +156,12 @@ function EditProductPage() {
             ))}
           </div>
         </div>
+        <button
+          type="submit"
+          className="w-full cursor-pointer rounded-md bg-green-500 py-2 text-white transition-colors hover:bg-green-600"
+        >
+          Update Product
+        </button>
       </form>
     </div>
   );
