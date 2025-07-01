@@ -147,7 +147,11 @@ function EditProductPage() {
           <div className="mt-4 flex gap-4">
             {productData.images.map((image, index) => (
               <div key={index}>
-                <img src="" alt="" />
+                <img
+                  src={image.url}
+                  alt={image.altText || "Product Image"}
+                  className="h-20 w-20 rounded-md object-cover shadow-md"
+                />
               </div>
             ))}
           </div>
