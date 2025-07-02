@@ -49,14 +49,26 @@ function OrderManagement() {
                     >
                       <option value="Processing">Processing</option>
                       <option value="Shipped">Shipped</option>
-                      <option value="Deliverd">Deliverd</option>
+                      <option value="Delivered">Delivered</option>
                       <option value="cancelled">cancelled</option>
                     </select>
+                  </td>
+                  <td className="p-4">
+                    <button
+                      onClick={() => handleStatusChange(order._id, "Delivered")}
+                      className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
+                    >
+                      Mark as Delivered
+                    </button>
                   </td>
                 </tr>
               ))
             ) : (
-              <tr></tr>
+              <tr>
+                <td colSpan={5} className="p-4 text-center text-gray-500">
+                  No Orders Found
+                </td>
+              </tr>
             )}
           </tbody>
         </table>
