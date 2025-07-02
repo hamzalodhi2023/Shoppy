@@ -45,8 +45,13 @@ function OrderManagement() {
                       onChange={(e) =>
                         handleStatusChange(order._id, e.target.value)
                       }
-                      className="bordr block rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-                    ></select>
+                      className="block rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                    >
+                      <option value="Processing">Processing</option>
+                      <option value="Shipped">Shipped</option>
+                      <option value="Deliverd">Deliverd</option>
+                      <option value="cancelled">cancelled</option>
+                    </select>
                   </td>
                 </tr>
               ))
