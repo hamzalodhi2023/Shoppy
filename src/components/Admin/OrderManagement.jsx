@@ -9,6 +9,10 @@ function OrderManagement() {
       status: "Processing",
     },
   ];
+
+  const handleStatusChange = (orderId, status) => {
+    console.log({ id: orderId, status: status });
+  };
   return (
     <div className="mx-auto max-w-7xl p-6">
       <h2 className="mb-6 text-2xl font-bold">Order Management</h2>
@@ -35,7 +39,15 @@ function OrderManagement() {
                   </td>
                   <td className="p-4">{order.user.name}</td>
                   <td className="p-4">${order.totalPrice}</td>
-                  <td className="p-4">{order.status}</td>
+                  <td className="p-4">
+                    <select
+                      value={order.status}
+                      onChange={(e) =>
+                        handleStatusChange(order._id, e.target.value)
+                      }
+                      className="bordr block rounded-lg border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                    ></select>
+                  </td>
                 </tr>
               ))
             ) : (
