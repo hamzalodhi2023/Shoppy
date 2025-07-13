@@ -80,4 +80,27 @@ export const fetchSimilarProducts = createAsyncThunk(
   },
 );
 
-const productsSlice = createSlice();
+const productsSlice = createSlice({
+  name: "products",
+  initialState: {
+    products: [],
+    selectedProduct: null,
+    similarProducts: [],
+    loading: false,
+    error: null,
+    filters: {
+      collection: "",
+      size: "",
+      color: "",
+      gender: "",
+      minPrice: 0,
+      maxPrice: 0,
+      sortBy: "",
+      search: "",
+      category: "",
+      material: "",
+      brand: "",
+      limit: 10,
+    },
+  },
+});
