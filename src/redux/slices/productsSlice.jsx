@@ -123,4 +123,16 @@ const productsSlice = createSlice({
       };
     },
   },
+  extraReducers: (builder) => {
+    builder
+      // handle fetching products by filters
+      .addCase(fetchProductsByFilters.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchProductsByFilters.fulfilled, (state, action) => {
+        state.loading = false;
+        state.products = Array.isArray(action.payload);
+      });
+  },
 });
