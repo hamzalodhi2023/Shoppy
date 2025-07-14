@@ -93,14 +93,34 @@ const productsSlice = createSlice({
       size: "",
       color: "",
       gender: "",
-      minPrice: 0,
-      maxPrice: 0,
+      minPrice: "",
+      maxPrice: "",
       sortBy: "",
       search: "",
       category: "",
       material: "",
       brand: "",
-      limit: 10,
+      // limit: "",
+    },
+  },
+  reducers: {
+    setFilters: (state, action) => {
+      state.filters = { ...state.filters, ...action.payload };
+    },
+    clearFilters: (state) => {
+      state.filters = {
+        collection: "",
+        size: "",
+        color: "",
+        gender: "",
+        minPrice: "",
+        maxPrice: "",
+        sortBy: "",
+        search: "",
+        category: "",
+        material: "",
+        brand: "",
+      };
     },
   },
 });
