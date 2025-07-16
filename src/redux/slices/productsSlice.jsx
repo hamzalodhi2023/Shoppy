@@ -28,7 +28,7 @@ export const fetchProductsByFilters = createAsyncThunk(
     if (maxPrice) query.append("maxPrice", maxPrice);
     if (sortBy) query.append("sortBy", sortBy);
     if (search) query.append("search", search);
-    // if (category) query.append("category", category);
+    if (category) query.append("category", category);
     if (material) query.append("material", material);
     if (brand) query.append("brand", brand);
     if (limit) query.append("limit", limit);
@@ -177,7 +177,7 @@ const productsSlice = createSlice({
       })
       .addCase(fetchSimilarProducts.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = Array.isArray(action.payload) ? action.payload : [];
+        state.products = action.payload;
       })
       .addCase(fetchSimilarProducts.rejected, (state, action) => {
         state.loading = false;
@@ -185,3 +185,6 @@ const productsSlice = createSlice({
       });
   },
 });
+
+export const { setFilters, clearFilters } = productsSlice.actions;
+export default productsSlice.reducer;
