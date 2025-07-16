@@ -11,3 +11,22 @@ const loadCartFromStorage = () => {
 const saveCartToStorage = (cart) => {
   localStorage.setItem("cart", JSON.stringify(cart));
 };
+
+// Fetch cart for a user to guest
+export const fetchCart = createAsyncThunk(
+  "cart/fetchCart",
+  async ({ userId, guestId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
+        {
+          params: { userId, guestId },
+        },
+      );
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
