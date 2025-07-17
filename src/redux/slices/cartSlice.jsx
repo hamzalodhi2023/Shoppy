@@ -78,3 +78,21 @@ export const updateCartItemQuantity = createAsyncThunk(
     }
   },
 );
+
+// Remove an item from the cart
+export const removeFromCart = createAsyncThunk(
+  "cart/removeFromCart",
+  async ({ productId, size, color, guestId, userId }, { rejectWithValue }) => {
+    try {
+      const response = await axios.delete({
+        method: "DELETE",
+        url: `${import.meta.env.VITE_BACKEND_URL}/api/cart`,
+        data: { productId, size, color, guestId, userId },
+      });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
