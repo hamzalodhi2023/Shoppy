@@ -145,16 +145,16 @@ const cartSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || "Failed to fetch cart";
       })
-      .addCase(fetchCart.pending, (state) => {
+      .addCase(addToCart.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchCart.fulfilled, (state, action) => {
+      .addCase(addToCart.fulfilled, (state, action) => {
         state.loading = false;
         state.cart = action.payload;
         saveCartToStorage(action.payload);
       })
-      .addCase(fetchCart.rejected, (state, action) => {
+      .addCase(addToCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to fetch cart";
       });
