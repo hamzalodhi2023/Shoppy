@@ -116,3 +116,19 @@ export const mergeCart = createAsyncThunk(
     }
   },
 );
+
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    cart: loadCartFromStorage(),
+    loading: false,
+    error: null,
+  },
+  reducers: {
+    clearCart: (state) => {
+      state.cart = { products: [] };
+      saveCartToStorage(state.cart);
+    },
+  },
+  extraReducers,
+});
