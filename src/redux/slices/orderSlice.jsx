@@ -40,3 +40,43 @@ export const fetchOrderDetails = createAsyncThunk(
     }
   },
 );
+
+const orderSlice = createSlice({
+  name: "orders",
+  initialState: {
+    order: [],
+    totalOrder: 0,
+    orderDetails: 0,
+    orderDetails: null,
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchUserOrders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchUserOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload;
+      })
+      .addCase(fetchUserOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(fetchOrderDetails.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchOrderDetails.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orderDetails = action.payload;
+      })
+      .addCase(fetchOrderDetails.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      });
+  },
+});
