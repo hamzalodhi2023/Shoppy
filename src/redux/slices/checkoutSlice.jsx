@@ -38,11 +38,13 @@ const checkoutSlice = createSlice({
       })
       .addCase(createCheckout.fulfilled, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        state.checkout = action.payload;
       })
       .addCase(createCheckout.rejected, (state, action) => {
-        state.loading = true;
-        state.error = action.payload;
+        state.loading = false;
+        state.error = action.payload.message;
       });
   },
 });
+
+export default checkoutSlice.reducer;
