@@ -4,7 +4,7 @@ import axios from "axios";
 // Helper function to load cart from localStorage
 const loadCartFromStorage = () => {
   const storedCart = localStorage.getItem("cart");
-  return storedCart ? JSON.pars(storedCart) : { products: [] };
+  return storedCart ? JSON.parse(storedCart) : { products: [] };
 };
 
 // Helper function to save cart to localStorage
