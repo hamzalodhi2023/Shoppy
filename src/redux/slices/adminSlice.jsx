@@ -23,7 +23,9 @@ export const addUser = createAsyncThunk(
         `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
         userData,
         {
-          headers: {},
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
         },
       );
       response.data;
