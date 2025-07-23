@@ -11,4 +11,22 @@ export const fetchUsers = createAsyncThunk("admin/fetchUsers", async () => {
       },
     },
   );
+  response.data;
 });
+
+// Add the create user action
+export const addUser = createAsyncThunk(
+  "admin/addUser",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
+        userData,
+        {
+          headers: {},
+        },
+      );
+      response.data;
+    } catch (error) {}
+  },
+);
