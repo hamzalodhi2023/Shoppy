@@ -13,5 +13,23 @@ export const fetchAdminProducts = createAsyncThunk(
         Authorization: USER_TOKEN,
       },
     });
+    return response.data;
+  },
+);
+
+// async function to create a new product
+export const createProduct = createAsyncThunk(
+  "adminProduct/createProduct",
+  async (productData) => {
+    const response = await axios.post(
+      `${API_URL}api/admin/products`,
+      productData,
+      {
+        headers: {
+          Authorization: USER_TOKEN,
+        },
+      },
+    );
+    return response.data;
   },
 );
