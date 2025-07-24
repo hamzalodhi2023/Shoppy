@@ -77,56 +77,38 @@ const adminSlice = createSlice({
     builder
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
-        state.error = null;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.users = action.payload;
       })
       .addCase(fetchUsers.rejected, (state, action) => {
-        state.loading = false;
+        state.loading = true;
         state.error = action.error.message;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const updateUser = action.payload;
+        const userIndex = state.users.findIndex(
+          (user) => user._id === updateUser._id,
+        );
+        if (userIndex !== -1) {
+          state.user[userIndex] = updatedUser;
+        }
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.users = state.users.filter((user) => user._id !== action.payload);
       })
       .addCase(addUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(addUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users.push(action.payload);
+        state.loading = true;
+        state.error = null;
       })
       .addCase(addUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(updateUser.pending, (state) => {
         state.loading = true;
         state.error = null;
-      })
-      .addCase(updateUser.fulfilled, (state, action) => {
-        state.loading = false;
-        const index = state.users.findIndex(
-          (user) => user.id === action.payload.id,
-        );
-        if (index !== -1) {
-          state.users[index] = action.payload;
-        }
-      })
-      .addCase(updateUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
-      })
-      .addCase(deleteUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(deleteUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users = state.users.filter((user) => user.id !== action.payload);
-      })
-      .addCase(deleteUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
       });
   },
 });
