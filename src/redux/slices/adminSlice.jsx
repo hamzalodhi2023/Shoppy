@@ -103,12 +103,13 @@ const adminSlice = createSlice({
         state.error = null;
       })
       .addCase(addUser.fulfilled, (state, action) => {
-        state.loading = true;
-        state.error = null;
+        state.loading = false;
+        state.users.push(action.payload); //add a new user to the state
       })
       .addCase(addUser.rejected, (state, action) => {
-        state.loading = true;
-        state.error = null;
+        state.loading = false;
+        state.error = action.payload.message; //set the error message
       });
   },
 });
+export default adminSlice.reducer;
