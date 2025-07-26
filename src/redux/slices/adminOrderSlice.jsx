@@ -80,13 +80,38 @@ const adminOrderSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchAllOrders.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(fetchAllOrders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.orders = action.payload;
+        state.totalOrders = action.payload.length;
+
+        // calculate total sales
+        const totalSales = action.payload.reduce((acc, order) => {
+          return acc + order.totalPrice;
+        }, 0);
+        state.totalSales = totalSales;
       })
-      .addCase(fetchAllOrders.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(fetchAllOrders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      // update order status
+      .addCase(updateOrderStatus.pending, (state, action) => {
+        const updatedOrder = action.payload;
+        const orderIndex = state.orders.findIndex(
+          (order) => order_id === updateOrderStatus._id,
+        );
+        if (orderIndex !== -1) {
+          state.orders[orderIndex] = updatedOrder;
+        }
+      })
+      // Delete an order
+      .addCase(deleteOrder.fulfilled, (state, action) => {
+        state.orders = state.orders.filter(
+          (order) => order._id !== action.payload,
+        );
       });
   },
 });
+
+export default adminOrderSlice.reducer;
