@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 
-function ProductGrid({ products }) {
+function ProductGrid({ products, loading, error }) {
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
   return (
     <div className="gird-cols-1 sm:gird-cols-2 grid gap-6 lg:grid-cols-4">
       {products.map((product, index) => (

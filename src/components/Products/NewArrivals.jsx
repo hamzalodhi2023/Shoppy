@@ -20,7 +20,7 @@ function NewArrivals() {
         );
         setNewArrivals(response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
     fetchNewArrivals();
