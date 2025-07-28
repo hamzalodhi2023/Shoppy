@@ -18,7 +18,7 @@ function ProductDetails({ productId }) {
   );
   const { user, guestId } = useSelector((state) => state.auth);
 
-  const [mainImage, setMainImage] = useState(""); // Fixed
+  const [mainImage, setMainImage] = useState(null); // Fixed
   const [selectedSize, setSelectedSize] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
   const [quantity, setQuantity] = useState(1);
@@ -139,7 +139,7 @@ function ProductDetails({ productId }) {
               <div className="mb-4">
                 <p className="text-gray-700">Color:</p>
                 <div className="mt-2 flex gap-2">
-                  {selectedProduct.color?.map((color) => (
+                  {selectedProduct.colors?.map((color) => (
                     <button
                       onClick={() => setSelectedColor(color)}
                       key={color}
@@ -157,7 +157,7 @@ function ProductDetails({ productId }) {
               <div className="mb-4">
                 <p className="text-gray-700">Size:</p>
                 <div className="mt-2 flex gap-2">
-                  {selectedProduct.size?.map((size) => (
+                  {selectedProduct.sizes?.map((size) => (
                     <button
                       onClick={() => setSelectedSize(size)}
                       key={size}
