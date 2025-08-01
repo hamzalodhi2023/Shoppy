@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
 
@@ -12,6 +12,7 @@ function NewArrivals() {
   const [canScrollRight, setCanScrollRight] = useState(true);
   //` New Arrivals Data
   const [newArrivals, setNewArrivals] = useState([]);
+
   useEffect(() => {
     const fetchNewArrivals = async () => {
       try {
@@ -35,7 +36,7 @@ function NewArrivals() {
   const handleMouseMove = (e) => {
     if (!isDragging) return;
     const x = e.pageX - scrollRef.current.offsetLeft;
-    const walk = (x - startX) * 2;
+    const walk = x - startX;
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
   const handleMouseUpOrLeave = () => {
@@ -46,9 +47,11 @@ function NewArrivals() {
     const scrollAmount = direction === "left" ? -300 : 300;
     scrollRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
   };
-  // Update Scroll Buttons
+
+  //` Update Scroll Buttons
   const updateScrollButtons = () => {
     const container = scrollRef.current;
+
     if (container) {
       const leftScroll = container.scrollLeft;
       const rightScrollable =
@@ -63,9 +66,7 @@ function NewArrivals() {
     if (container) {
       container.addEventListener("scroll", updateScrollButtons);
       updateScrollButtons();
-      return () => {
-        container.removeEventListener("scroll", updateScrollButtons);
-      };
+      return () => container.removeEventListener("scroll", updateScrollButtons);
     }
   }, [newArrivals]);
 
@@ -104,25 +105,27 @@ function NewArrivals() {
         onMouseLeave={handleMouseUpOrLeave}
         className={`relative container mx-auto flex space-x-6 overflow-x-scroll ${isDragging ? "cursor-grabbing" : "cursor-grab"}`}
       >
-        {newArrivals?.map((product) => (
-          <div
-            key={product._id}
-            className="relative min-w-[100%] sm:min-w-[30%]"
-          >
-            <img
-              src={product.images[0]?.url}
-              alt={product.images[0]?.altText || product.name}
-              className="h-[500px] w-full rounded-lg object-cover select-none"
-              draggable={false}
-            />
-            <div className="absolute right-0 bottom-0 left-0 rounded-b-lg bg-white/20 p-4 text-white backdrop-blur-sm">
-              <Link to={`/product/${product._id}`} className="block">
-                <h4 className="font-medium select-none">{product.name}</h4>
-                <p className="mt-1 select-none">{product.price}</p>
-              </Link>
+        {newArrivals?.map((product) => {
+          return (
+            <div
+              key={product._id}
+              className="relative min-w-[100%] sm:min-w-[30%]"
+            >
+              <img
+                src={product.images[0]?.url}
+                alt={product.images[0]?.altText || product.name}
+                className="h-[500px] w-full rounded-lg object-cover select-none"
+                draggable={false}
+              />
+              <div className="absolute right-0 bottom-0 left-0 rounded-b-lg bg-white/20 p-4 text-white backdrop-blur-sm">
+                <Link to={`/product/${product._id}`} className="block">
+                  <h4 className="font-medium select-none">{product.name}</h4>
+                  <p className="mt-1 select-none">{product.price}</p>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
