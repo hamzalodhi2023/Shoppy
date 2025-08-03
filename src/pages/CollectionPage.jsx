@@ -3,8 +3,11 @@ import { FaFilter } from "react-icons/fa";
 import FilterSidebar from "../components/Products/FilterSidebar";
 import SortOptions from "../components/Products/SortOptions";
 import ProductGrid from "../components/Products/ProductGrid";
+import { useParams, useSearchParams } from "react-router-dom";
 
 function CollectionPage() {
+  const { collection } = useParams();
+  const { searchParams } = useSearchParams();
   const [products, setProducts] = useState([]);
   const sidebarRef = useRef(null);
   const buttonRef = useRef(null); // Filter button ref
