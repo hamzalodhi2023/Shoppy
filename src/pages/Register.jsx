@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import register from "../assets/register.jpg";
+import register from "../assets/Register.jpg";
 import { registerUser } from "../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 

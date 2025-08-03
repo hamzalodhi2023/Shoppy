@@ -41,11 +41,7 @@ function ProductDetails({ productId }) {
 
   const handleQuantityChange = (action) => {
     if (action === "plus") setQuantity((prev) => prev + 1);
-    else if (action === "minus") {
-      if (quantity > 1) {
-        setQuantity((prev) => prev - 1);
-      }
-    }
+    if (action === "minus" && quantity > 1) setQuantity((prev) => prev - 1);
   };
 
   const handleAddToCart = () => {
@@ -55,7 +51,9 @@ function ProductDetails({ productId }) {
       });
       return;
     }
+
     setIsButtonDisabled(true);
+
     dispatch(
       addToCart({
         productId: productFetchId,
@@ -78,6 +76,7 @@ function ProductDetails({ productId }) {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
+  // console.log(selectedProduct);
   return (
     <div className="p-6">
       {selectedProduct && (
