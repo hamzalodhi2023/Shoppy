@@ -37,7 +37,7 @@ export const addToCart = createAsyncThunk(
   ) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/addToCart`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/carts`,
         { productId, quantity, size, color, guestId, userId },
       );
       console.log("Response from addToCart:");
