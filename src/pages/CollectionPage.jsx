@@ -1,24 +1,36 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { FaFilter } from "react-icons/fa";
 import FilterSidebar from "../components/Products/FilterSidebar";
 import SortOptions from "../components/Products/SortOptions";
 import ProductGrid from "../components/Products/ProductGrid";
 import { useParams, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductsByFilters } from "../redux/slices/productsSlice";
 
 function CollectionPage() {
   const { collection } = useParams();
-  const { searchParams } = useSearchParams();
-  const [products, setProducts] = useState([]);
+  const [searchParams] = useSearchParams();
+  const dispatch = useDispatch();
+  const { products, loading, error } = useSelector((state) => state.products);
+
   const sidebarRef = useRef(null);
-  const buttonRef = useRef(null); // Filter button ref
+  const buttonRef = useRef(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // ✅ useMemo to prevent unnecessary re-renders and re-fetches
+  const queryParams = useMemo(() => {
+    return Object.fromEntries([...searchParams]);
+  }, [searchParams]);
+
+  useEffect(() => {
+    dispatch(fetchProductsByFilters({ collection, ...queryParams }));
+  }, [dispatch, collection, queryParams]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
   const handleClickOutside = (e) => {
-    // Close sidebar if click is outside both sidebar and filter button
     if (
       sidebarRef.current &&
       !sidebarRef.current.contains(e.target) &&
@@ -36,65 +48,9 @@ function CollectionPage() {
     };
   }, []);
 
-  useEffect(() => {
-    setTimeout(() => {
-      const fetchedProducts = [
-        {
-          _id: 1,
-          name: "Product 1",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=2" }],
-        },
-        {
-          _id: 2,
-          name: "Product 2",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=8" }],
-        },
-        {
-          _id: 3,
-          name: "Product 3",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=12" }],
-        },
-        {
-          _id: 4,
-          name: "Product 4",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=14" }],
-        },
-        {
-          _id: 5,
-          name: "Product 5",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=15" }],
-        },
-        {
-          _id: 6,
-          name: "Product 6",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=16" }],
-        },
-        {
-          _id: 7,
-          name: "Product 7",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=17" }],
-        },
-        {
-          _id: 8,
-          name: "Product 8",
-          price: 100,
-          images: [{ url: "https://picsum.photos/500/500?random=18" }],
-        },
-      ];
-      setProducts(fetchedProducts);
-    }, 1000);
-  }, []);
-
   return (
     <div className="flex flex-col lg:flex-row">
-      {/* Mobile Filter Button with ref */}
+      {/* Mobile Filter Button */}
       <button
         ref={buttonRef}
         onClick={toggleSidebar}
@@ -106,18 +62,18 @@ function CollectionPage() {
       {/* Filter Sidebar */}
       <div
         ref={sidebarRef}
-        className={`${isSidebarOpen ? "translate-x-0" : "-translate-x-full"} fixed inset-y-0 left-0 z-50 w-64 overflow-y-auto bg-white transition-transform duration-300 lg:static lg:translate-x-0`}
+        className={`${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } fixed inset-y-0 left-0 z-50 w-64 overflow-y-auto bg-white transition-transform duration-300 lg:static lg:translate-x-0`}
       >
         <FilterSidebar />
       </div>
+
+      {/* Main Content */}
       <div className="flex-grow p-4">
         <h2 className="mb-4 text-2xl uppercase">All Collection</h2>
-
-        {/* Sort Options */}
         <SortOptions />
-
-        {/* Product Grid */}
-        <ProductGrid products={products} />
+        <ProductGrid products={products} loading={loading} error={error} />
       </div>
     </div>
   );
