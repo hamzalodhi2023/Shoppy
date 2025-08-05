@@ -6,7 +6,12 @@ function CartComponents({ cart, userId, guestId }) {
   const dispatch = useDispatch();
 
   // Handle adding or subtracting to cart
-  const handleAddToCart = (productId, delta, quantity, size, color) => {};
+  const handleAddToCart = (productId, delta, quantity, size, color) => {
+    const newQuantity = quantity + delta;
+    if (newQuantity <= 1) {
+      dispatch({});
+    }
+  };
   return (
     <div>
       {cartProducts.map((product, index) => (
