@@ -2,26 +2,6 @@ import React from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
 
 function CartComponents() {
-  const cartProducts = [
-    {
-      productId: 1,
-      name: "T-shirt",
-      size: "M",
-      color: "Red",
-      quantity: 2,
-      price: 200,
-      image: "https://picsum.photos/200?random=1",
-    },
-    {
-      productId: 2,
-      name: "Jeans",
-      size: "L",
-      color: "Blue",
-      quantity: 1,
-      price: 130,
-      image: "https://picsum.photos/200?random=1",
-    },
-  ];
   return (
     <div>
       {cartProducts.map((product, index) => (

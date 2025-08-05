@@ -32,21 +32,30 @@ function CartDrawer({ toggleCartDrawer, drawerOpen }) {
       {/* Cart contents with scrollable area */}
       <div className="flex-grow overflow-y-auto p-4">
         <h2 className="mb-4 text-xl font-semibold">Your Cart</h2>
-        {/* Component for Cart Contents */}
-        <CartComponents />
+        {cart && cart?.products?.length > 0 ? (
+          <CartComponents cart={cart} userId={userId} guestId={guestId} />
+        ) : (
+          <p>Your cart is empty...</p>
+        )}
       </div>
 
       {/* Checkout button fixed at the bottom */}
       <div className="sticky bottom-0 bg-white p-4">
-        <button
-          onClick={handleCheckout}
-          className="w-full cursor-pointer rounded-lg bg-black py-3 font-semibold text-white transition hover:bg-gray-800"
-        >
-          Checkout
-        </button>
-        <p className="mt-2 text-center text-sm tracking-tighter text-gray-500">
-          Shipping, texes, and discount codes calculated at checkout.
-        </p>
+        {cart &&
+          cart?.products?.length >
+            0(
+              <>
+                <button
+                  onClick={handleCheckout}
+                  className="w-full cursor-pointer rounded-lg bg-black py-3 font-semibold text-white transition hover:bg-gray-800"
+                >
+                  Checkout
+                </button>
+                <p className="mt-2 text-center text-sm tracking-tighter text-gray-500">
+                  Shipping, texes, and discount codes calculated at checkout.
+                </p>
+              </>,
+            )}
       </div>
     </div>
   );
