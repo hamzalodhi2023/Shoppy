@@ -97,25 +97,25 @@ function Navbar() {
           <h2 className="mb-4 text-xl font-semibold">Menu</h2>
           <nav className="space-y-4">
             <Link
-              to="/collections/all"
+              to="/collections/all?gender=Men"
               className="mb-2 block text-sm font-medium text-gray-700 uppercase hover:text-black"
             >
               Men
             </Link>
             <Link
-              to="#"
+              to="/collections/all?gender=Women"
               className="mb-2 block text-sm font-medium text-gray-700 uppercase hover:text-black"
             >
               Women
             </Link>
             <Link
-              to="#"
+              to="/collections/all?category=Top Wear"
               className="mb-2 block text-sm font-medium text-gray-700 uppercase hover:text-black"
             >
               Top Wear
             </Link>
             <Link
-              to="#"
+              to="/collections/all?category=Bottom Wear"
               className="mb-2 block text-sm font-medium text-gray-700 uppercase hover:text-black"
             >
               Bottom Wear
