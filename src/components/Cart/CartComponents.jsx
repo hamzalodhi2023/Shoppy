@@ -1,7 +1,12 @@
 import React from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 
-function CartComponents() {
+function CartComponents({ cart, userId, guestId }) {
+  const dispatch = useDispatch();
+
+  // Handle adding or subtracting to cart
+  const handleAddToCart = (productId, delta, quantity, size, color) => {};
   return (
     <div>
       {cartProducts.map((product, index) => (
