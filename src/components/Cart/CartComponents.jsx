@@ -1,6 +1,9 @@
-import React from "react";
 import { RiDeleteBin2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
+import {
+  removeFromCart,
+  updateCartItemQuantity,
+} from "../../redux/slices/cartSlice";
 
 function CartComponents({ cart, userId, guestId }) {
   const dispatch = useDispatch();
@@ -9,12 +12,25 @@ function CartComponents({ cart, userId, guestId }) {
   const handleAddToCart = (productId, delta, quantity, size, color) => {
     const newQuantity = quantity + delta;
     if (newQuantity <= 1) {
-      dispatch({});
+      dispatch(
+        updateCartItemQuantity({
+          productId,
+          quantity: newQuantity,
+          guestId,
+          userId,
+          size,
+          color,
+        }),
+      );
     }
+  };
+
+  const handleRemoveFromCart = (productId, size, color) => {
+    dispatch(removeFromCart({ productId, guestId, userId, size, color }));
   };
   return (
     <div>
-      {cartProducts.map((product, index) => (
+      {cart.products.map((product, index) => (
         <div
           key={index}
           className="flex items-start justify-between border-b py-4"
@@ -31,11 +47,33 @@ function CartComponents({ cart, userId, guestId }) {
                 size:{product.size} | color: {product.color}
               </p>
               <div className="mt-2 flex items-center">
-                <button className="cursor-pointer rounded border px-2 py-1 text-xl font-medium">
+                <button
+                  onClick={() =>
+                    handleAddToCart(
+                      product.productId,
+                      -1,
+                      product.quantity,
+                      product.size,
+                      product.color,
+                    )
+                  }
+                  className="cursor-pointer rounded border px-2 py-1 text-xl font-medium"
+                >
                   -
                 </button>
                 <span className="mx-4">{product.quantity}</span>
-                <button className="cursor-pointer rounded border px-2 py-1 text-xl font-medium">
+                <button
+                  onClick={() =>
+                    handleAddToCart(
+                      product.productId,
+                      1,
+                      product.quantity,
+                      product.size,
+                      product.color,
+                    )
+                  }
+                  className="cursor-pointer rounded border px-2 py-1 text-xl font-medium"
+                >
                   +
                 </button>
               </div>
@@ -43,7 +81,15 @@ function CartComponents({ cart, userId, guestId }) {
           </div>
           <div>
             <p>${product.price.toLocaleString()}</p>
-            <button>
+            <button
+              onClick={() =>
+                handleRemoveFromCart(
+                  product.productId,
+                  product.size,
+                  product.color,
+                )
+              }
+            >
               <RiDeleteBin2Line className="mt-2 h-6 w-6 cursor-pointer text-red-600" />
             </button>
           </div>
