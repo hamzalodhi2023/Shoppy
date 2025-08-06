@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { HiMagnifyingGlass, HiMiniXMark } from "react-icons/hi2";
-import { Form } from "react-router-dom";
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -35,7 +34,7 @@ function SearchBar() {
               type="submit"
               className="absolute top-1/2 right-2 -translate-y-1/2 transform text-gray-600 hover:text-gray-800"
             >
-              <HiMagnifyingGlass className="h-6 w-6" />
+              <HiMagnifyingGlass className="h-6 w-6 cursor-pointer" />
             </button>
           </div>
           {/* close Button */}
@@ -44,12 +43,12 @@ function SearchBar() {
             onClick={handleSearchToggle}
             className="absolute top-1/2 right-4 -translate-y-1/2 transform text-gray-600 hover:text-gray-800"
           >
-            <HiMiniXMark className="h-6 w-6" />
+            <HiMiniXMark className="h-6 w-6 cursor-pointer" />
           </button>
         </form>
       ) : (
         <button onClick={handleSearchToggle}>
-          <HiMagnifyingGlass className="h-6 w-6" />
+          <HiMagnifyingGlass className="h-6 w-6 cursor-pointer" />
         </button>
       )}
     </div>
