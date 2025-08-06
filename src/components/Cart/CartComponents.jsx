@@ -11,7 +11,7 @@ function CartComponents({ cart, userId, guestId }) {
   // Handle adding or subtracting to cart
   const handleAddToCart = (productId, delta, quantity, size, color) => {
     const newQuantity = quantity + delta;
-    if (newQuantity <= 1) {
+    if (newQuantity >= 1) {
       dispatch(
         updateCartItemQuantity({
           productId,

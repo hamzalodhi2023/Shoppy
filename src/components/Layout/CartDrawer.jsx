@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 function CartDrawer({ toggleCartDrawer, drawerOpen }) {
   const navigate = useNavigate();
   const { user, guestId } = useSelector((state) => state.auth);
-  const { cart } = useSelector((state) => state.auth);
+  const { cart } = useSelector((state) => state.cart);
   const userId = user ? user._id : null;
 
   const handleCheckout = () => {
@@ -41,21 +41,19 @@ function CartDrawer({ toggleCartDrawer, drawerOpen }) {
 
       {/* Checkout button fixed at the bottom */}
       <div className="sticky bottom-0 bg-white p-4">
-        {cart &&
-          cart?.products?.length >
-            0(
-              <>
-                <button
-                  onClick={handleCheckout}
-                  className="w-full cursor-pointer rounded-lg bg-black py-3 font-semibold text-white transition hover:bg-gray-800"
-                >
-                  Checkout
-                </button>
-                <p className="mt-2 text-center text-sm tracking-tighter text-gray-500">
-                  Shipping, texes, and discount codes calculated at checkout.
-                </p>
-              </>,
-            )}
+        {cart && cart?.products?.length > 0 && (
+          <>
+            <button
+              onClick={handleCheckout}
+              className="w-full cursor-pointer rounded-lg bg-black py-3 font-semibold text-white transition hover:bg-gray-800"
+            >
+              Checkout
+            </button>
+            <p className="mt-2 text-center text-sm tracking-tighter text-gray-500">
+              Shipping, texes, and discount codes calculated at checkout.
+            </p>
+          </>
+        )}
       </div>
     </div>
   );
