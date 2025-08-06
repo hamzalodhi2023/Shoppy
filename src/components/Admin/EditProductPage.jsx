@@ -31,12 +31,10 @@ function EditProductPage() {
 
   const handleImageUpload = async (e) => {
     const file = e.target.files[0];
-    console.log(file);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(productData);
   };
   return (
     <div className="mx-auto max-w-5xl rounded-md p-6 shadow-md">
