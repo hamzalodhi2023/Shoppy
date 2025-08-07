@@ -1,28 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-const cart = {
-  products: [
-    {
-      name: "stylish Jacket",
-      size: "M",
-      color: "Black",
-      price: 120,
-      image: "https://picsum.photos/150?random=1",
-    },
-    {
-      name: "casual Sneakers",
-      size: 42,
-      color: "White",
-      price: 80,
-      image: "https://picsum.photos/150?random=2",
-    },
-  ],
-  totalPrice: 195,
-};
+import { createCheckout } from "../../redux/slices/checkoutSlice";
 
 function Checkout() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { cart, loading, error } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.auth);
+
   const [checkoutId, setCheckoutId] = useState(null);
   const [shippingAddress, setShippingAddress] = useState({
     firstName: "",
@@ -34,9 +20,26 @@ function Checkout() {
     phone: "",
   });
 
+  //` Ensure cart is loading before proceeding
+
+  useEffect(() => {
+    if (!cart || !cart.products || cart.products.length === 0) {
+      navigate("/");
+    }
+  }, [cart, navigate]);
+
   const handleCreateCheckout = (e) => {
     e.preventDefault();
-    setCheckoutId(123);
+    if (cart && cart.products.length > 0) {
+      const res = dispatch(
+        createCheckout({
+          checkoutItems: cart.products,
+          shippingAddress,
+          paymentMethod: "Paypal",
+          totalPrice: cart.totalPrice,
+        }),
+      );
+    }
   };
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-10 tracking-tighter lg:grid-cols-2">
