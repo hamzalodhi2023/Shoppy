@@ -39,8 +39,24 @@ function Checkout() {
           totalPrice: cart.totalPrice,
         }),
       );
+      if (res.payload && res.payload._id) {
+        setCheckoutId(res.payload._id); //` Set Checkout ID if checkout was successful
+      }
     }
   };
+
+  const handlePaymentSuccess = async (details) => {
+    try {
+      const response = await axios.put(
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/pay`,
+        {
+          paymentStatus: "paid",
+        },
+      );
+    } catch (error) {}
+    navigate("/order-confirmation");
+  };
+
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-10 tracking-tighter lg:grid-cols-2">
       {/* Left Section */}
