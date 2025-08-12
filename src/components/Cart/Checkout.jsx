@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
+import axios from "axios";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -51,12 +52,49 @@ function Checkout() {
         `${import.meta.env.VITE_BACKEND_URL}/api/checkout/pay`,
         {
           paymentStatus: "paid",
+          paymentDetails: details,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
         },
       );
+
+      if (response.status === 200) {
+        await handleFinalizeCheckout(checkoutId);
+      } else {
+        console.error(error);
+      }
     } catch (error) {}
     navigate("/order-confirmation");
   };
 
+  const handleFinalizeCheckout = async (checkoutId) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/finalize`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+          },
+        },
+      );
+      if (response.status === 200) {
+        navigate("/order-confirmation");
+      } else {
+        console.error(error);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (loading) return <p>Loading cart...</p>;
+  if (error) return <p>Error: {error}</p>;
+  if (!cart || !cart.products || cart.products.length === 0) {
+    return <p>Your cart is empty</p>;
+  }
   return (
     <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-6 py-10 tracking-tighter lg:grid-cols-2">
       {/* Left Section */}
@@ -69,7 +107,7 @@ function Checkout() {
             <input
               type="email"
               disabled
-              value="user@example.com"
+              value={user ? user.email : ""}
               className="w-full rounded border p-2"
             />
           </div>
