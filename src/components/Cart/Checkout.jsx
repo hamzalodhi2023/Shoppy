@@ -60,12 +60,7 @@ function Checkout() {
           },
         },
       );
-
-      if (response.status === 201) {
-        navigate("/order-confirmation");
-      } else {
-        console.error("Finalize failed", response);
-      }
+      navigate("/order-confirmation");
     } catch (error) {
       console.error("Finalize error", error);
     }
