@@ -12,13 +12,10 @@ function Checkout() {
 
   const [checkoutId, setCheckoutId] = useState(null);
   const [shippingAddress, setShippingAddress] = useState({
-    // firstName: "",
-    // lastName: "",
     address: "",
     city: "",
     postalCode: "",
     country: "",
-    // phone: "",
   });
 
   //` Ensure cart is loading before proceeding
@@ -46,30 +43,6 @@ function Checkout() {
       }
     }
   };
-
-  // const handlePaymentSuccess = async (details) => {
-  //   try {
-  //     const response = await axios.put(
-  // `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/pay`,
-  //       {
-  //         paymentStatus: "paid",
-  //         paymentDetails: details,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-  //         },
-  //       },
-  //     );
-
-  //     if (response.status === 200) {
-  //       await handleFinalizeCheckout(checkoutId);
-  //     } else {
-  //       console.error(error);
-  //     }
-  //   } catch (error) {}
-  //   navigate("/order-confirmation");
-  // };
 
   const handleFinalizeCheckout = async (checkoutId) => {
     if (!checkoutId) {
@@ -127,13 +100,6 @@ function Checkout() {
                 type="text"
                 className="w-full rounded border p-2"
                 required
-                // value={shippingAddress.firstName}
-                // onChange={(e) =>
-                //   setShippingAddress({
-                //     ...shippingAddress,
-                //     firstName: e.target.value,
-                //   })
-                // }
               />
             </div>
             <div>
@@ -142,13 +108,6 @@ function Checkout() {
                 type="text"
                 className="w-full rounded border p-2"
                 required
-                // value={shippingAddress.lastName}
-                // onChange={(e) =>
-                //   setShippingAddress({
-                //     ...shippingAddress,
-                //     lastName: e.target.value,
-                //   })
-                // }
               />
             </div>
           </div>
@@ -222,18 +181,7 @@ function Checkout() {
             <label htmlFor="" className="block text-gray-700">
               Phone Number
             </label>
-            <input
-              type="tel"
-              // value={shippingAddress.phone}
-              // onChange={(e) =>
-              //   setShippingAddress({
-              //     ...shippingAddress,
-              //     phone: e.target.value,
-              //   })
-              // }
-              className="w-full rounded border p-2"
-              required
-            />
+            <input type="tel" className="w-full rounded border p-2" required />
           </div>
           <div className="mt-6">
             <button
