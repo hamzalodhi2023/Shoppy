@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import axios from "axios";
@@ -12,13 +12,13 @@ function Checkout() {
 
   const [checkoutId, setCheckoutId] = useState(null);
   const [shippingAddress, setShippingAddress] = useState({
-    firstName: "",
-    lastName: "",
+    // firstName: "",
+    // lastName: "",
     address: "",
     city: "",
     postalCode: "",
     country: "",
-    phone: "",
+    // phone: "",
   });
 
   //` Ensure cart is loading before proceeding
@@ -29,10 +29,10 @@ function Checkout() {
     }
   }, [cart, navigate]);
 
-  const handleCreateCheckout = (e) => {
+  const handleCreateCheckout = async (e) => {
     e.preventDefault();
     if (cart && cart.products.length > 0) {
-      const res = dispatch(
+      const res = await dispatch(
         createCheckout({
           checkoutItems: cart.products,
           shippingAddress,
@@ -41,52 +41,60 @@ function Checkout() {
         }),
       );
       if (res.payload && res.payload._id) {
-        setCheckoutId(res.payload._id); //` Set Checkout ID if checkout was successful
+        setCheckoutId(res.payload._id); // Save to state
+        await handleFinalizeCheckout(res.payload._id); // 👈 call with valid ID
       }
     }
   };
 
-  const handlePaymentSuccess = async (details) => {
-    try {
-      const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/pay`,
-        {
-          paymentStatus: "paid",
-          paymentDetails: details,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-          },
-        },
-      );
+  // const handlePaymentSuccess = async (details) => {
+  //   try {
+  //     const response = await axios.put(
+  // `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/pay`,
+  //       {
+  //         paymentStatus: "paid",
+  //         paymentDetails: details,
+  //       },
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+  //         },
+  //       },
+  //     );
 
-      if (response.status === 200) {
-        await handleFinalizeCheckout(checkoutId);
-      } else {
-        console.error(error);
-      }
-    } catch (error) {}
-    navigate("/order-confirmation");
-  };
+  //     if (response.status === 200) {
+  //       await handleFinalizeCheckout(checkoutId);
+  //     } else {
+  //       console.error(error);
+  //     }
+  //   } catch (error) {}
+  //   navigate("/order-confirmation");
+  // };
 
   const handleFinalizeCheckout = async (checkoutId) => {
+    if (!checkoutId) {
+      console.error("Checkout ID is missing!");
+      return;
+    }
+
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/api/checkout/${checkoutId}/finalize`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/checkouts/${checkoutId}/finalize`,
+        {}, // body (empty)
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         },
       );
-      if (response.status === 200) {
+
+      if (response.status === 201) {
         navigate("/order-confirmation");
       } else {
-        console.error(error);
+        console.error("Finalize failed", response);
       }
     } catch (error) {
-      console.error(error);
+      console.error("Finalize error", error);
     }
   };
 
@@ -119,13 +127,13 @@ function Checkout() {
                 type="text"
                 className="w-full rounded border p-2"
                 required
-                value={shippingAddress.firstName}
-                onChange={(e) =>
-                  setShippingAddress({
-                    ...shippingAddress,
-                    firstName: e.target.value,
-                  })
-                }
+                // value={shippingAddress.firstName}
+                // onChange={(e) =>
+                //   setShippingAddress({
+                //     ...shippingAddress,
+                //     firstName: e.target.value,
+                //   })
+                // }
               />
             </div>
             <div>
@@ -134,13 +142,13 @@ function Checkout() {
                 type="text"
                 className="w-full rounded border p-2"
                 required
-                value={shippingAddress.lastName}
-                onChange={(e) =>
-                  setShippingAddress({
-                    ...shippingAddress,
-                    lastName: e.target.value,
-                  })
-                }
+                // value={shippingAddress.lastName}
+                // onChange={(e) =>
+                //   setShippingAddress({
+                //     ...shippingAddress,
+                //     lastName: e.target.value,
+                //   })
+                // }
               />
             </div>
           </div>
@@ -216,34 +224,27 @@ function Checkout() {
             </label>
             <input
               type="tel"
-              value={shippingAddress.phone}
-              onChange={(e) =>
-                setShippingAddress({
-                  ...shippingAddress,
-                  phone: e.target.value,
-                })
-              }
+              // value={shippingAddress.phone}
+              // onChange={(e) =>
+              //   setShippingAddress({
+              //     ...shippingAddress,
+              //     phone: e.target.value,
+              //   })
+              // }
               className="w-full rounded border p-2"
               required
             />
           </div>
           <div className="mt-6">
-            {!checkoutId ? (
-              <button
-                onClick={(e) => {
-                  (e.preventDefault(), navigate("/order-confirmation"));
-                }}
-                type="submit"
-                className="w-full rounded bg-black py-3 text-white"
-              >
-                Continue to payment
-              </button>
-            ) : (
-              <div>
-                <h3 className="mb-4 text-lg">Pay with Paypal</h3>
-                {/* Paypal Component */}
-              </div>
-            )}
+            <button
+              // onClick={(e) => {
+              //   (e.preventDefault(), navigate("/order-confirmation"));
+              // }}
+              type="submit"
+              className="w-full rounded bg-black py-3 text-white"
+            >
+              Continue to payment
+            </button>
           </div>
         </form>
       </div>

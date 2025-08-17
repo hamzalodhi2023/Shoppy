@@ -71,7 +71,7 @@ const authSlice = createSlice({
       state.guestId = `guest_${new Date().getTime()}`;
       localStorage.removeItem("userInfo");
       localStorage.removeItem("userToken");
-      localStorage.setItem("guestId", state.guestId); // ✅ fix this
+      localStorage.setItem("guestId", state.guestId);
     },
     generateNewGuestId: (state) => {
       state.guestId = `guest_${new Date().getTime()}`;

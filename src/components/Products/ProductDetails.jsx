@@ -61,7 +61,7 @@ function ProductDetails({ productId }) {
         size: selectedSize,
         color: selectedColor,
         guestId,
-        userId: user?._id,
+        userId: user?.id,
       }),
     )
       .then(() => {
