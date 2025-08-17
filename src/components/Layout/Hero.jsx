@@ -21,7 +21,7 @@ function Hero() {
           </p>
           <Link
             to=""
-            className="hover:bg-steel-blue rounded-sm bg-white px-6 py-2 text-lg text-gray-950 transition-all hover:text-white"
+            className="bg-steel-blue rounded-sm px-6 py-2 text-lg text-white transition-all hover:bg-[#3ea0f0]"
           >
             Shop Now!
           </Link>

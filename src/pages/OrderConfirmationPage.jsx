@@ -1,34 +1,22 @@
-const checkout = {
-  _id: "12323",
-  createdAt: new Date(),
-  checkoutItems: [
-    {
-      productId: "1",
-      name: "Jacket",
-      color: "Black",
-      size: "M",
-      price: 150,
-      quantity: 2,
-      image: "https://picsum.photos/150?random=1",
-    },
-    {
-      productId: "2",
-      name: "T-shirt",
-      color: "Black",
-      size: "M",
-      price: 120,
-      quantity: 1,
-      image: "https://picsum.photos/150?random=2",
-    },
-  ],
-  shippingAddress: {
-    address: "123 Fashion Streey",
-    city: "New York",
-    country: "USA",
-  },
-};
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { clearCart } from "../redux/slices/cartSlice";
 
 function OrderConfirmationPage() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { checkout } = useSelector((state) => state.checkout);
+
+  useEffect(() => {
+    if (checkout && checkout._id) {
+      dispatch(clearCart());
+      localStorage.removeItem("cart");
+    } else {
+      navigate("/my-order");
+    }
+  }, [checkout, dispatch, navigate]);
+
   const calculatedEstimatedDelivery = (createdAt) => {
     const orderDate = new Date(createdAt);
     orderDate.setDate(orderDate.getDate() + 10); // Add 10 days to the order date
@@ -88,7 +76,7 @@ function OrderConfirmationPage() {
               <h4 className="test-lg mb-2 font-semibold">Payment</h4>
               <p className="test-gray-600">Paypal</p>
             </div>
-            {/* Delicery Info */}
+            {/* Delivery Info */}
             <div>
               <h4 className="test-lg mb-2 font-semibold">Delivery</h4>
               <p className="text-gray-600">
