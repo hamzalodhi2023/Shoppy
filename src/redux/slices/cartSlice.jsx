@@ -60,7 +60,6 @@ export const updateCartItemQuantity = createAsyncThunk(
         `${import.meta.env.VITE_BACKEND_URL}/api/carts`,
         { productId, quantity, size, color, guestId, userId },
       );
-      console.log(response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
