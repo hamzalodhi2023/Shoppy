@@ -145,7 +145,6 @@ function ProductDetails({ productId }) {
                       className={`h-8 w-8 cursor-pointer rounded-full border ${selectedColor === color ? "border-4 border-black" : "border-gray-300"}`}
                       style={{
                         backgroundColor: color.toLocaleLowerCase(),
-                        filter: "brightness(0.5)",
                       }}
                     ></button>
                   ))}
