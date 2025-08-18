@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
+import { ScaleLoader } from "react-spinners";
 
 function ProductGrid({ products, loading, error }) {
-  if (loading) {
-    return <p>Loading...</p>;
-  }
+  if (loading)
+    return (
+      <div className="flex h-[20vh] w-full items-center justify-center">
+        <ScaleLoader
+          loading={loading}
+          color="steelBlue"
+          size={150}
+          data-testid="loader"
+        />
+      </div>
+    );
   if (error) {
     return <p>Error: {error}</p>;
   }

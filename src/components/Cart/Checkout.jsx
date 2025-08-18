@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import axios from "axios";
+import { ScaleLoader } from "react-spinners";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -66,7 +67,17 @@ function Checkout() {
     }
   };
 
-  if (loading) return <p>Loading cart...</p>;
+  if (loading)
+    return (
+      <div className="flex h-[20vh] w-full items-center justify-center">
+        <ScaleLoader
+          loading={loading}
+          color="steelBlue"
+          size={150}
+          data-testid="loader"
+        />
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
   if (!cart || !cart.products || cart.products.length === 0) {
     return <p>Your cart is empty</p>;

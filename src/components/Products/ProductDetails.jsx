@@ -8,6 +8,7 @@ import {
   fetchSimilarProducts,
 } from "../../redux/slices/productsSlice";
 import { addToCart } from "../../redux/slices/cartSlice";
+import { ScaleLoader } from "react-spinners";
 
 function ProductDetails({ productId }) {
   const { id } = useParams();
@@ -74,7 +75,17 @@ function ProductDetails({ productId }) {
       });
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex h-[20vh] w-full items-center justify-center">
+        <ScaleLoader
+          loading={loading}
+          color="steelBlue"
+          size={150}
+          data-testid="loader"
+        />
+      </div>
+    );
   if (error) return <p>Error: {error}</p>;
   // console.log(selectedProduct);
   return (

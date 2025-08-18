@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { fetchUserOrders } from "../redux/slices/orderSlice";
+import { ScaleLoader } from "react-spinners";
 
 function MyOrdersPage() {
   const navigate = useNavigate();
@@ -16,7 +17,17 @@ function MyOrdersPage() {
     navigate(`/order/${orderId}`);
   };
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex h-[20vh] w-full items-center justify-center">
+        <ScaleLoader
+          loading={loading}
+          color="steelBlue"
+          size={150}
+          data-testid="loader"
+        />
+      </div>
+    );
   if (error) return <p>Error:{error}</p>;
 
   return (
