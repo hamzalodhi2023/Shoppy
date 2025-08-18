@@ -56,7 +56,7 @@ function AdminHomePage() {
           </div>
           <div className="rounded-lg p-4 shadow-md">
             <h2 className="text-xl font-semibold">Manage Products</h2>
-            <p className="text-2xl">100</p>
+            <p className="text-2xl">{products.length}</p>
             <Link
               to="/admin/products"
               className="text-blue-500 hover:underline"
@@ -87,7 +87,7 @@ function AdminHomePage() {
                   >
                     <td className="p-4">#{order._id}</td>
                     <td className="p-4">{order.user.name}</td>
-                    <td className="p-4">{order.totalPrice}</td>
+                    <td className="p-4">{order.totalPrice.toFixed(2)}</td>
                     <td className="p-4">{order.status}</td>
                   </tr>
                 ))
