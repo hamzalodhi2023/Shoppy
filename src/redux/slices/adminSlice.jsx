@@ -7,14 +7,14 @@ export const fetchUsers = createAsyncThunk("admin/fetchUsers", async () => {
     `${import.meta.env.VITE_BACKEND_URL}/api/admin/users`,
     {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
     },
   );
   return response.data;
 });
 
-// Add user
+// addUser
 export const addUser = createAsyncThunk(
   "admin/addUser",
   async (userData, { rejectWithValue }) => {
@@ -24,11 +24,11 @@ export const addUser = createAsyncThunk(
         userData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         },
       );
-      return response.data;
+      return response.data.user;
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -45,7 +45,7 @@ export const updateUser = createAsyncThunk(
         { name, email, role },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("userToken")}`,
           },
         },
       );
@@ -56,17 +56,17 @@ export const updateUser = createAsyncThunk(
   },
 );
 
-// Delete user
+// Delete
 export const deleteUser = createAsyncThunk("admin/deleteUser", async (id) => {
   await axios.delete(
     `${import.meta.env.VITE_BACKEND_URL}/api/admin/users/${id}`,
     {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem("userToken")}`,
       },
     },
   );
-  return id;
+  return id; // ✅ return the deleted user's ID
 });
 
 const adminSlice = createSlice({
@@ -79,7 +79,7 @@ const adminSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Fetch users
+      //` Fetch users
       .addCase(fetchUsers.pending, (state) => {
         state.loading = true;
       })
@@ -92,7 +92,21 @@ const adminSlice = createSlice({
         state.error = action.error.message;
       })
 
-      // Add user
+      //` Update User
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const updatedUser = action.payload;
+        const index = state.users.findIndex(
+          (user) => user._id === updatedUser._id,
+        );
+        if (index !== -1) {
+          state.users[index] = updatedUser;
+        }
+      })
+      //` Delete user
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.users = state.users.filter((user) => user._id !== action.payload);
+      })
+      //` add User
       .addCase(addUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -104,17 +118,6 @@ const adminSlice = createSlice({
       .addCase(addUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
-      })
-
-      // Update user (✅ only once)
-      .addCase(updateUser.fulfilled, (state, action) => {
-        const updatedUser = action.payload;
-        const index = state.users.findIndex(
-          (user) => user._id === updatedUser._id,
-        );
-        if (index !== -1) {
-          state.users[index] = updatedUser;
-        }
       });
   },
 });
