@@ -96,15 +96,20 @@ const adminOrderSlice = createSlice({
         state.error = action.payload.message;
       })
       // update order status
-      .addCase(updateOrderStatus.pending, (state, action) => {
+      .addCase(updateOrderStatus.fulfilled, (state, action) => {
         const updatedOrder = action.payload;
-        const orderIndex = state.orders.findIndex(
-          (order) => order_id === updateOrderStatus._id,
+        const index = state.orders.findIndex(
+          (order) => order._id === updatedOrder._id,
         );
-        if (orderIndex !== -1) {
-          state.orders[orderIndex] = updatedOrder;
+        if (index !== -1) {
+          state.orders[index] = updatedOrder;
         }
       })
+      .addCase(updateOrderStatus.rejected, (state, action) => {
+        state.error =
+          action.payload?.message || "Failed to update order status";
+      })
+
       // Delete an order
       .addCase(deleteOrder.fulfilled, (state, action) => {
         state.orders = state.orders.filter(
