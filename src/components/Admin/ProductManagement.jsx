@@ -1,20 +1,52 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  deleteProduct,
+  fetchAdminProducts,
+} from "../../redux/slices/adminProductSlice";
+import { ScaleLoader } from "react-spinners";
 
 function ProductManagement() {
-  const products = [
-    {
-      _id: 123123,
-      name: "Shirt",
-      price: 100,
-      sku: "123123",
-    },
-  ];
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth);
+  const { products, loading, error } = useSelector(
+    (state) => state.adminProducts,
+  );
+
+  useEffect(() => {
+    if (user && user.role !== "admin") {
+      navigate("/");
+    }
+  }, [user, navigate]);
+
+  useEffect(() => {
+    dispatch(fetchAdminProducts());
+  }, [dispatch]);
 
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this product?")) {
-      console.log("Delete Product with id:", id);
+      dispatch(deleteProduct(id));
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex h-[20vh] w-full items-center justify-center">
+        <ScaleLoader
+          loading={loading}
+          color="steelBlue"
+          size={150}
+          data-testid="loader"
+        />
+      </div>
+    );
+  }
+
+  if (error) {
+    return <p>Error:{error}</p>;
+  }
   return (
     <div className="mx-auto max-w-7xl p-6">
       <h2 className="mb-6 text-2xl font-bold">Product Management</h2>
@@ -22,6 +54,7 @@ function ProductManagement() {
         <table className="min-w-full text-left text-gray-500">
           <thead className="bg-gray-100 text-xs text-gray-700 uppercase">
             <tr>
+              <th className="px-4 py-3">No.</th>
               <th className="px-4 py-3">Name</th>
               <th className="px-4 py-3">Price</th>
               <th className="px-4 py-3">SKU</th>
@@ -30,11 +63,14 @@ function ProductManagement() {
           </thead>
           <tbody>
             {products.length > 0 ? (
-              products.map((product) => (
+              products.map((product, index) => (
                 <tr
-                  key={products._id}
+                  key={product._id}
                   className="cursor-pointer border-b hover:bg-gray-50"
                 >
+                  <td className="p-4 font-medium whitespace-nowrap text-gray-900">
+                    {index + 1}
+                  </td>
                   <td className="p-4 font-medium whitespace-nowrap text-gray-900">
                     {product.name}
                   </td>
