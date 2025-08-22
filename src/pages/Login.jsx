@@ -11,7 +11,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const { user, guestId } = useSelector((state) => state.auth);
+  const { user, guestId, loading } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
 
   //`Get redirect parameter and check if it's checkout or something
@@ -71,7 +71,7 @@ function Login() {
             type="submit"
             className="w-full rounded-lg bg-black p-2 font-semibold text-white transition hover:bg-gray-800"
           >
-            Sign In
+            {loading ? "Loading..." : "Sign In"}
           </button>
           <p className="mt-6 text-center text-sm">
             Don't have an account?{" "}
