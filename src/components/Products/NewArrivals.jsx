@@ -79,7 +79,7 @@ function NewArrivals() {
           keep your wardrobe on the cutting edge of fashion
         </p>
         {/* Scroll Buttons */}
-        <div className="absolute right-0 bottom-[-30px] flex space-x-2">
+        <div className="absolute right-0 bottom-[-40px] mt-3 flex space-x-2">
           <button
             onClick={() => scroll("left")}
             disabled={!canScrollLeft}
