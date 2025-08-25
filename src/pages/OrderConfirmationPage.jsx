@@ -24,61 +24,65 @@ function OrderConfirmationPage() {
   };
 
   return (
-    <div className="mx-auto max-w-4xl bg-white p-6">
-      <h1 className="mb-8 text-center text-4xl font-bold text-emerald-700">
-        Thank! For the order{" "}
+    <div className="mx-auto max-w-4xl bg-white p-4 sm:p-6">
+      <h1 className="mb-8 text-center text-3xl font-bold text-emerald-700 sm:text-4xl">
+        Thank You! For the order
       </h1>
+
       {checkout && (
-        <div className="rounded-lg border p-6">
-          <div className="mb-20 flex justify-between">
-            {/* Order Id and Date */}
+        <div className="rounded-lg border p-4 sm:p-6">
+          {/* Order ID and Estimated Delivery */}
+          <div className="mb-8 flex flex-col justify-between sm:flex-row">
             <div>
-              <h2 className="text-xl font-semibold">
+              <h2 className="text-base font-semibold sm:text-xl">
                 Order ID: {checkout._id}
               </h2>
-              <p className="text-gray-500">
+              <p className="text-sm text-gray-500">
                 Order date: {new Date(checkout.createdAt).toLocaleDateString()}
               </p>
             </div>
-            {/* Estimated Delivery */}
-            <div>
+            <div className="mt-2 sm:mt-0">
               <p className="text-sm text-emerald-700">
                 Estimated Delivery:{" "}
                 {calculatedEstimatedDelivery(checkout.createdAt)}
               </p>
             </div>
           </div>
+
           {/* Ordered Items */}
-          <div className="mb-20">
+          <div className="mb-10 space-y-4">
             {checkout.checkoutItems.map((item) => (
-              <div key={item.productId} className="mb-4 flex items-center">
+              <div
+                key={item.productId}
+                className="flex flex-col items-center gap-4 border-b pb-4 sm:flex-row"
+              >
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="mr-4 h-16 w-16 rounded-md object-cover"
+                  className="h-20 w-20 rounded-md object-cover"
                 />
-                <div>
+                <div className="flex-1 text-center sm:text-left">
                   <h4 className="text-base font-semibold">{item.name}</h4>
                   <p className="text-sm text-gray-500">
-                    {item.color}| {item.size}
+                    {item.color} | {item.size}
                   </p>
                 </div>
-                <div className="ml-auto text-right">
+                <div className="text-center sm:text-right">
                   <p className="text-base">${item.price}</p>
                   <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
                 </div>
               </div>
             ))}
           </div>
-          {/* Payment and Delivery Info */}
-          <div className="grid grid-cols-2 gap-8">
+
+          {/* Payment & Delivery Info */}
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
             <div>
-              <h4 className="test-lg mb-2 font-semibold">Payment</h4>
-              <p className="test-gray-600">Paypal</p>
+              <h4 className="mb-2 text-lg font-semibold">Payment</h4>
+              <p className="text-gray-600">Paypal</p>
             </div>
-            {/* Delivery Info */}
             <div>
-              <h4 className="test-lg mb-2 font-semibold">Delivery</h4>
+              <h4 className="mb-2 text-lg font-semibold">Delivery</h4>
               <p className="text-gray-600">
                 {checkout.shippingAddress.address}
               </p>
