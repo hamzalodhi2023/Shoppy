@@ -40,7 +40,7 @@ function Profile() {
           </div>
           {/* Right Section: Order Table */}
           <div className="md:2/3 w-full rounded-lg p-6 shadow-md lg:w-3/4">
-            <MyOrdersPage />
+            {user && <MyOrdersPage />}
           </div>
         </div>
       </div>

@@ -7,11 +7,14 @@ import { ScaleLoader } from "react-spinners";
 function MyOrdersPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
   const { orders, loading, error } = useSelector((state) => state.orders);
 
   useEffect(() => {
-    dispatch(fetchUserOrders());
-  }, [dispatch]);
+    if (user) {
+      dispatch(fetchUserOrders());
+    }
+  }, [user, dispatch]);
 
   const handleRowClick = (orderId) => {
     navigate(`/order/${orderId}`);
