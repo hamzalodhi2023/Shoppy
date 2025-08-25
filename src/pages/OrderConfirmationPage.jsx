@@ -26,7 +26,7 @@ function OrderConfirmationPage() {
   return (
     <div className="mx-auto max-w-4xl bg-white p-6">
       <h1 className="mb-8 text-center text-4xl font-bold text-emerald-700">
-        Thank You for Your Order!{" "}
+        Thank! For the order{" "}
       </h1>
       {checkout && (
         <div className="rounded-lg border p-6">

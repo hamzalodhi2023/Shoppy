@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import axios from "axios";
 import { ScaleLoader } from "react-spinners";
+import { toast } from "sonner";
 
 function Checkout() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function Checkout() {
     postalCode: "",
     country: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   //` Ensure cart is loading before proceeding
 
@@ -30,17 +32,28 @@ function Checkout() {
   const handleCreateCheckout = async (e) => {
     e.preventDefault();
     if (cart && cart.products.length > 0) {
-      const res = await dispatch(
-        createCheckout({
-          checkoutItems: cart.products,
-          shippingAddress,
-          paymentMethod: "Paypal",
-          totalPrice: cart.totalPrice,
-        }),
-      );
-      if (res.payload && res.payload._id) {
-        setCheckoutId(res.payload._id); // Save to state
-        await handleFinalizeCheckout(res.payload._id); // 👈 call with valid ID
+      setIsSubmitting(true); // 👈 Start loading
+      try {
+        const res = await dispatch(
+          createCheckout({
+            checkoutItems: cart.products,
+            shippingAddress,
+            paymentMethod: "Paypal",
+            totalPrice: cart.totalPrice,
+          }),
+        );
+
+        if (res.payload && res.payload._id) {
+          setCheckoutId(res.payload._id);
+          await handleFinalizeCheckout(res.payload._id);
+        }
+      } catch (error) {
+        console.error("Checkout error:", error);
+      } finally {
+        toast.success("Your order has been submitted", {
+          duration: 1000,
+        });
+        setIsSubmitting(false);
       }
     }
   };
@@ -191,13 +204,11 @@ function Checkout() {
           </div>
           <div className="mt-6">
             <button
-              // onClick={(e) => {
-              //   (e.preventDefault(), navigate("/order-confirmation"));
-              // }}
               type="submit"
-              className="w-full rounded bg-black py-3 text-white"
+              disabled={isSubmitting}
+              className="w-full rounded bg-black py-3 text-white transition hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-60"
             >
-              Continue to payment
+              {isSubmitting ? "Submitting..." : "Continue to payment"}
             </button>
           </div>
         </form>
