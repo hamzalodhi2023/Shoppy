@@ -50,9 +50,18 @@ function OrderDetailsPage() {
                 {orderDetails.isPaid ? "Approved" : "Pending"}
               </span>
               <span
-                className={`${orderDetails.isDelivered ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"} mb-2 rounded-full px-3 py-1 text-sm font-medium`}
+                className={`mb-2 rounded-full px-3 py-1 text-sm font-medium ${
+                  orderDetails.status === "Processing"
+                    ? "bg-yellow-100 text-yellow-700"
+                    : orderDetails.status === "Shipped"
+                      ? "bg-blue-100 text-blue-700"
+                      : orderDetails.status === "Delivered"
+                        ? "bg-green-100 text-green-700"
+                        : orderDetails.status === "Cancelled"
+                          ? "bg-red-100 text-red-700"
+                          : ""
+                }`}
               >
-                {/* {orderDetails.isDelivered ? "Delivered" : "Pending Delivery"} */}
                 {orderDetails.status}
               </span>
             </div>
