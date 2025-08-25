@@ -22,8 +22,12 @@ function Topbar() {
           <span>Shop like a king, save like a boss — only here, full on!</span>
         </div>
         <div className="hidden text-sm md:block">
-          <a href="tel:+1234567890" className="hover:text-gray-300">
-            +1 (234) 567-890
+          <a
+            href="tel:+92 300 0000000
+"
+            className="hover:text-gray-300"
+          >
+            +92 300 0000000
           </a>
         </div>
       </div>
