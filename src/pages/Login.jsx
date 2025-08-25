@@ -4,19 +4,21 @@ import login from "../assets/login.jpg";
 import { loginUser } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { mergeCart } from "../redux/slices/cartSlice";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // 👈 New state
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const { user, guestId, loading } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
 
-  //`Get redirect parameter and check if it's checkout or something
   const redirect = new URLSearchParams(location.search).get("redirect") || "/";
   const isCheckoutRedirect = redirect.includes("checkout");
+
   useEffect(() => {
     if (user) {
       if (cart?.products.length > 0 && guestId) {
@@ -33,6 +35,7 @@ function Login() {
     e.preventDefault();
     dispatch(loginUser({ email, password }));
   };
+
   return (
     <div className="flex">
       <div className="flex w-full flex-col items-center justify-center p-8 md:w-1/2 md:p-12">
@@ -47,6 +50,8 @@ function Login() {
           <p className="mb-6 text-center">
             Enter your username and password to Login
           </p>
+
+          {/* Email Field */}
           <div className="mb-4">
             <label className="mb-2 block text-sm font-semibold">Email</label>
             <input
@@ -57,22 +62,39 @@ function Login() {
               placeholder="Enter your email address"
             />
           </div>
+
+          {/* Password Field with Toggle */}
           <div className="mb-4">
             <label className="mb-2 block text-sm font-semibold">Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded border p-2"
-              placeholder="Enter your password"
-            />
+
+            {/* Input + Eye Button wrapper */}
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full rounded border p-2 pr-10"
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute inset-y-0 right-3 flex items-center text-gray-500"
+              >
+                {showPassword ? <FaEyeSlash size={20} /> : <FaEye size={20} />}
+              </button>
+            </div>
           </div>
+
+          {/* Submit */}
           <button
             type="submit"
             className="w-full rounded-lg bg-black p-2 font-semibold text-white transition hover:bg-gray-800"
           >
             {loading ? "Loading..." : "Sign In"}
           </button>
+
+          {/* Register Link */}
           <p className="mt-6 text-center text-sm">
             Don't have an account?{" "}
             <Link
@@ -84,6 +106,8 @@ function Login() {
           </p>
         </form>
       </div>
+
+      {/* Side Image */}
       <div className="hidden w-1/2 bg-gray-800 md:block">
         <div className="flex h-full flex-col items-center justify-center">
           <img src={login} alt="" className="h-[750px] w-full object-cover" />
@@ -92,4 +116,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;
