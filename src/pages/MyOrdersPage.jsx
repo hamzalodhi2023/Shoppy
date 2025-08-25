@@ -93,7 +93,7 @@ function MyOrdersPage() {
               ))
             ) : (
               <tr>
-                <td colSpan={7} className="py-4 text-center text-gray-500">
+                <td colSpan={3} className="py-4 text-center text-gray-500">
                   You have no orders
                 </td>
               </tr>
