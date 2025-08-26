@@ -70,8 +70,10 @@ const adminOrderSlice = createSlice({
     totalOrders: 0,
     totalSales: 0,
     loading: false,
+    updateStatusLoading: false, // ✅ Add this line
     error: null,
   },
+
   reducers: {},
   extraReducers: (builder) => {
     builder
@@ -96,7 +98,12 @@ const adminOrderSlice = createSlice({
         state.error = action.payload.message;
       })
       // update order status
+      // update order status
+      .addCase(updateOrderStatus.pending, (state) => {
+        state.updateStatusLoading = true; // ✅ Show loader when status update starts
+      })
       .addCase(updateOrderStatus.fulfilled, (state, action) => {
+        state.updateStatusLoading = false; // ✅ Stop loader
         const updatedOrder = action.payload;
         const index = state.orders.findIndex(
           (order) => order._id === updatedOrder._id,
@@ -106,15 +113,9 @@ const adminOrderSlice = createSlice({
         }
       })
       .addCase(updateOrderStatus.rejected, (state, action) => {
+        state.updateStatusLoading = false; // ✅ Stop loader on error
         state.error =
           action.payload?.message || "Failed to update order status";
-      })
-
-      // Delete an order
-      .addCase(deleteOrder.fulfilled, (state, action) => {
-        state.orders = state.orders.filter(
-          (order) => order._id !== action.payload,
-        );
       });
   },
 });

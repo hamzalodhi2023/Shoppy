@@ -12,7 +12,9 @@ function OrderManagement() {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
-  const { orders, loading, error } = useSelector((state) => state.adminOrders);
+  const { orders, loading, updateStatusLoading, error } = useSelector(
+    (state) => state.adminOrders,
+  );
 
   useEffect(() => {
     if (!user || user.role !== "admin") {
@@ -87,7 +89,8 @@ function OrderManagement() {
                       onClick={() => handleStatusChange(order._id, "Delivered")}
                       className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
                     >
-                      Mark as Delivered
+                      {updateStatusLoading ? "Loading..." : "Mark as Delivered"}
+                      {/* Mark as Delivered */}
                     </button>
                   </td>
                 </tr>
