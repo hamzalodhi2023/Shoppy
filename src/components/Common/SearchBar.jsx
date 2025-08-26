@@ -19,10 +19,12 @@ function SearchBar() {
   const handleSearch = (e) => {
     e.preventDefault();
     dispatch(setFilters({ search: searchTerm }));
-    dispatch(fetchProductsByFilters({ searchTerm: searchTerm }));
-    navigate(`collections/all?search=${searchTerm}`);
-    setIsOpen(false);
+    dispatch(fetchProductsByFilters({ search: searchTerm }));
+    navigate(`/collections/all?search=${searchTerm}`);
+    setSearchTerm(""); // optional: clear input
+    setIsOpen(false); // close the search bar
   };
+
   return (
     <div
       className={`flex w-full items-center justify-center transition-all duration-100 ${isOpen ? "absolute top-0 left-0 z-50 h-24 bg-white" : "w-auto"}`}
