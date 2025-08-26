@@ -13,9 +13,20 @@ function ProductGrid({ products, loading, error }) {
         />
       </div>
     );
+
   if (error) {
     return <p>Error: {error}</p>;
   }
+
+  // ✅ If no products found
+  if (!products || products.length === 0) {
+    return (
+      <div className="flex h-[20vh] items-center justify-center text-gray-500">
+        Product not found
+      </div>
+    );
+  }
+
   return (
     <div className="gird-cols-1 sm:gird-cols-2 grid gap-6 lg:grid-cols-4">
       {products.map((product, index) => (
