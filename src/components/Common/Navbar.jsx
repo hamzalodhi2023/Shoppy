@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { HiOutlineShoppingBag, HiOutlineUsers } from "react-icons/hi";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 
 function Navbar() {
+  const navDrawerRef = useRef(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [navDrawerOpen, setNavDrawerOpen] = useState(false);
   const { cart } = useSelector((state) => state.cart);
@@ -23,6 +24,26 @@ function Navbar() {
   const toggleCartDrawer = () => {
     setDrawerOpen(!drawerOpen);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        navDrawerRef.current &&
+        !navDrawerRef.current.contains(event.target)
+      ) {
+        setNavDrawerOpen(false);
+      }
+    };
+
+    if (navDrawerOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [navDrawerOpen]);
+
   return (
     <>
       <nav className="container mx-auto flex justify-between px-6 py-4">
@@ -99,6 +120,7 @@ function Navbar() {
       <CartDrawer drawerOpen={drawerOpen} toggleCartDrawer={toggleCartDrawer} />
       {/* Mobile Navigation */}
       <div
+        ref={navDrawerRef}
         className={`sm:w1/2 fixed top-0 left-0 z-50 h-full w-3/4 transform bg-white shadow-lg transition-transform duration-300 md:w-1/3 ${navDrawerOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div className="flex justify-end p-4">

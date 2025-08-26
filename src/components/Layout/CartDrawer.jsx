@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { IoMdClose } from "react-icons/io";
 import CartComponents from "../Cart/CartComponents";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function CartDrawer({ toggleCartDrawer, drawerOpen }) {
+  const drawerRef = useRef(null);
   const navigate = useNavigate();
   const { user, guestId } = useSelector((state) => state.auth);
   const { cart } = useSelector((state) => state.cart);
@@ -19,8 +20,25 @@ function CartDrawer({ toggleCartDrawer, drawerOpen }) {
     }
   };
 
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+        toggleCartDrawer();
+      }
+    }
+
+    if (drawerOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [drawerOpen, toggleCartDrawer]);
+
   return (
     <div
+      ref={drawerRef}
       className={`fixed top-0 right-0 z-50 flex h-full w-3/4 transform flex-col bg-white shadow-lg transition-transform duration-300 sm:w-1/2 md:w-[30rem] ${drawerOpen ? "translate-x-0" : "translate-x-full"}`}
     >
       {/* close Button */}
