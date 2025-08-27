@@ -1,11 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { builders } from "prettier/doc.js";
 
-// Fetch all orders (admin only)
+// ✅ Fetch all orders (admin only)
 export const fetchAllOrders = createAsyncThunk(
   "adminOrders/fetchAllOrders",
-  async (__DO_NOT_USE__ActionTypes, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
       const response = await axios.get(
         `${import.meta.env.VITE_BACKEND_URL}/api/admin/orders`,
@@ -22,7 +21,7 @@ export const fetchAllOrders = createAsyncThunk(
   },
 );
 
-// update order delivery status
+// ✅ Update order delivery status
 export const updateOrderStatus = createAsyncThunk(
   "adminOrders/updateOrderStatus",
   async ({ id, status }, { rejectWithValue }) => {
@@ -43,7 +42,7 @@ export const updateOrderStatus = createAsyncThunk(
   },
 );
 
-// Delete an order
+// ✅ Delete an order
 export const deleteOrder = createAsyncThunk(
   "adminOrders/deleteOrder",
   async (id, { rejectWithValue }) => {
@@ -70,14 +69,12 @@ const adminOrderSlice = createSlice({
     totalOrders: 0,
     totalSales: 0,
     loading: false,
-    updateStatusLoading: false, // ✅ Add this line
     error: null,
   },
-
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Fetch all orders
+      // ✅ Fetch all orders
       .addCase(fetchAllOrders.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -86,24 +83,18 @@ const adminOrderSlice = createSlice({
         state.loading = false;
         state.orders = action.payload;
         state.totalOrders = action.payload.length;
-
-        // calculate total sales
-        const totalSales = action.payload.reduce((acc, order) => {
-          return acc + order.totalPrice;
-        }, 0);
-        state.totalSales = totalSales;
+        state.totalSales = action.payload.reduce(
+          (acc, order) => acc + order.totalPrice,
+          0,
+        );
       })
       .addCase(fetchAllOrders.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       })
-      // update order status
-      // update order status
-      .addCase(updateOrderStatus.pending, (state) => {
-        state.updateStatusLoading = true; // ✅ Show loader when status update starts
-      })
+
+      // ✅ Update order status
       .addCase(updateOrderStatus.fulfilled, (state, action) => {
-        state.updateStatusLoading = false; // ✅ Stop loader
         const updatedOrder = action.payload;
         const index = state.orders.findIndex(
           (order) => order._id === updatedOrder._id,
@@ -113,9 +104,20 @@ const adminOrderSlice = createSlice({
         }
       })
       .addCase(updateOrderStatus.rejected, (state, action) => {
-        state.updateStatusLoading = false; // ✅ Stop loader on error
         state.error =
           action.payload?.message || "Failed to update order status";
+      })
+
+      // ✅ Delete order
+      .addCase(deleteOrder.fulfilled, (state, action) => {
+        state.orders = state.orders.filter(
+          (order) => order._id !== action.payload,
+        );
+        state.totalOrders = state.orders.length;
+        state.totalSales = state.orders.reduce(
+          (acc, order) => acc + order.totalPrice,
+          0,
+        );
       });
   },
 });

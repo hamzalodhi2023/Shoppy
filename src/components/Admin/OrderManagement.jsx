@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -12,9 +12,9 @@ function OrderManagement() {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.auth);
-  const { orders, loading, updateStatusLoading, error } = useSelector(
-    (state) => state.adminOrders,
-  );
+  const { orders, loading, error } = useSelector((state) => state.adminOrders);
+
+  const [loadingOrderId, setLoadingOrderId] = useState(null); // ✅ For per-order loading
 
   useEffect(() => {
     if (!user || user.role !== "admin") {
@@ -24,19 +24,16 @@ function OrderManagement() {
     }
   }, [dispatch, user, navigate]);
 
-  const handleStatusChange = (orderId, status) => {
-    dispatch(updateOrderStatus({ id: orderId, status }));
+  const handleStatusChange = async (orderId, status) => {
+    setLoadingOrderId(orderId); // ✅ Show loading for that order
+    await dispatch(updateOrderStatus({ id: orderId, status }));
+    setLoadingOrderId(null); // ✅ Reset loading
   };
 
   if (loading) {
     return (
       <div className="flex h-[20vh] w-full items-center justify-center">
-        <ScaleLoader
-          loading={loading}
-          color="steelBlue"
-          size={150}
-          data-testid="loader"
-        />
+        <ScaleLoader color="steelBlue" size={150} />
       </div>
     );
   }
@@ -44,6 +41,7 @@ function OrderManagement() {
   if (error) {
     return <p>Error: {error}</p>;
   }
+
   return (
     <div className="mx-auto max-w-7xl p-6">
       <h2 className="mb-6 text-2xl font-bold">Order Management</h2>
@@ -89,8 +87,9 @@ function OrderManagement() {
                       onClick={() => handleStatusChange(order._id, "Delivered")}
                       className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
                     >
-                      {updateStatusLoading ? "Loading..." : "Mark as Delivered"}
-                      {/* Mark as Delivered */}
+                      {loadingOrderId === order._id
+                        ? "Loading..."
+                        : "Mark as Delivered"}
                     </button>
                   </td>
                 </tr>
@@ -108,4 +107,5 @@ function OrderManagement() {
     </div>
   );
 }
+
 export default OrderManagement;
